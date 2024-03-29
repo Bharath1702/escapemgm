@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | ESCAPE ROOM</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="../Gallary/escapelogo.webp" type="image/x-icon">
+<link rel="stylesheet" href="../css/hamburger.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url(./img/horrorbg.jpg);
+    background-repeat: repeat;
+  }
+  .gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    z-index: index auto;
+  }
+  .gallery-item {
+    flex: 0 0 calc(33.33% - 20px);
+    margin: 10px;
+    position: relative;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    max-width: 100%;
+    max-height:100%;
+    width: 100%;
+    height: 300px;
+    border: 2px solid gold;
+    border-radius: 20px;
+  }
+  .fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  .fullscreen img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 2px solid gold;
+    border-radius: 10%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .gallery-item {
+      flex-basis: calc(50% - 20px);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .gallery-item {
+      flex-basis: calc(100% - 20px);
+    }
+  }
+</style>
+</head>
+<body>
+  
+  <nav class="navbar">
+    <div class="navbar-container container">
+        <input type="checkbox" name="" id="">
+        <div class="hamburger-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+        </div>
+        <ul class="menu-items">
+          <li><a href="https://escapemgm.com/">HOME</a></li>
+          <li><a href="https://escapemgm.com/#shop">ABOUT</a></li>
+          <li><a href="https://escapemgm.com/gallery/">GALLERY</a></li>
+          <li><a href="https://escapemgm.com/events/">BULK BOOKING</a></li>
+          <li><a href="https://escapemgm.com/whats-coming-next/">WHAT'S COMING</a></li>
+          <li><a href="https://escapemgm.com/contact-us-2/">CONTACT</a></li>
+        </ul>
+        <a href="https://escapemgm.com/">
+          <img src="../Gallary/escapelogo.webp" class="logo" alt="logo" height="10px" width="auto">
+        </a>
+    </div>
+</nav>
+    <br><br><br><br><br>
+    
+
+<div class="gallery-container">
+  <section>
+    <h2 class="h2 section-title" style="color: white;">
+      ESCAPE <br><span class="span"> GALLERY </span>
+    </h2>
+    <br><br>  
+  </section>
+  <div class="gallery-container">
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.10-PM-1-1024x762.jpeg" alt="Image 1">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.08-PM-2-1024x762.jpeg" alt="Image 2">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.09-PM-1-1024x762.jpeg" alt="Image 3">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.09-PM-2-1024x762.jpeg" alt="Image 4">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.09-PM-1024x762.jpeg" alt="Image 5">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.10-PM-1024x762.jpeg" alt="Image 6">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.11-PM-1-1024x763.jpeg" alt="Image 7">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.11-PM-2-1024x762.jpeg" alt="Image 8">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.11-PM-2-1024x762.jpeg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.07-PM-1-1024x768.jpeg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.07-PM-1024x768.jpeg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.08-PM-1-1024x763.jpeg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-23-at-12.06.08-PM-1024x1011.jpeg" alt="Image 9">
+    </div>
+    <!-- <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/290055187_373389304893421_786209106264430412_n-1024x1024.jpg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/292865577_1442671842847411_2321963223164745728_n-1024x1024.jpg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/299336052_809593330485078_6131322082826126258_n-1024x1024.jpg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/306376364_481419633617044_41273050968784991_n.jpg" alt="Image 9">
+    </div> -->
+    <!-- <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/307806564_1155739035360988_7472158598288711860_n.jpg" alt="Image 9">
+    </div> -->
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/testimonials-6.jpg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/testimonials-5.jpg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/testimonials-4.jpg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/testimonials-3.jpg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/testimonials-2.jpg" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="https://escapemgm.com/wp-content/uploads/2022/09/escape-room-testimonials.jpg" alt="Image 9">
+    </div>
+    <!-- <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div>
+    <div class="gallery-item">
+      <img src="" alt="Image 9">
+    </div> -->
+
+
+  <!-- Add more images as needed -->
+  <footer class="footer" style="background-color: black; width: 100%;">
+
+    <div class="footer-top">
+      <div class="container">
+
+        <div class="footer-brand">
+
+          <a href="https://escapemgm.com" class="flogo">ESCAPE ROOM</a>
+
+          <p class="footer-text">
+            The game never ends
+          </p>
+
+          <ul class="contact-list">
+
+            <li class="contact-item">
+              <div class="contact-icon">
+                <ion-icon name="location"></ion-icon>
+              </div>
+
+              <address class="item-text">
+                Address : No 12, 3rd Floor Pragati Mansion, 1st Cross Rd, 5th Block, Koramangala, Karnataka 560034
+              </address>
+            </li>
+
+            <li class="contact-item">
+              <div class="contact-icon">
+                <ion-icon name="headset"></ion-icon>
+              </div>
+
+              <a href="tel:+917676372273" class="item-text">Phone : +91 76763 72273</a>
+            </li>
+
+            <li class="contact-item">
+              <div class="contact-icon">
+                <ion-icon name="mail-open"></ion-icon>
+              </div>
+
+              <a href="mailto:escaperoombangalore@gmail.com" class="item-text">Email : escaperoombangalore@gmail.com</a>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Usefull Links</p>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/" class="footer-link">Home</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/#shop" class="footer-link">About</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/gallery/" class="footer-link">Gallery</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/events/" class="footer-link">Events</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/whats-coming-next/" class="footer-link">Whats Coming</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/contact-us-2/" class="footer-link">Contact Us</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Need Help?</p>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/t&c/" class="footer-link">Terms & Conditions</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/sr/" class="footer-link">Shipping, Returns & Refunds</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/rp/" class="footer-link">Privacy Policy</a>
+          </li>
+
+          <!-- <li>
+              <a href="#" class="footer-link">Affiliate</a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">Use Cases</a>
+            </li> -->
+
+        </ul>
+
+        <div class="footer-wrapper">
+
+          <div class="social-wrapper">
+
+            <p class="footer-list-title">Follow Us</p>
+
+            <ul class="social-list">
+
+              <li>
+                <a href="https://www.facebook.com/INEscapeRoom/" class="social-link" style="background-color: #3b5998">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="https://www.instagram.com/inescaperoom/" class="social-link" style="background-color: #55acee">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+              </li>
+
+              <!-- <li>
+                  <a href="#" class="social-link" style="background-color: #d71e18">
+                    <ion-icon name="logo-pinterest"></ion-icon>
+                  </a>
+                </li>
+  
+                <li>
+                  <a href="#" class="social-link" style="background-color: #1565c0">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a>
+                </li> -->
+
+            </ul>
+
+          </div>
+
+          <!-- <div class="footer-newsletter">
+  
+              <p class="footer-list-title">Newsletter Sign Up</p>
+  
+              <form action="" class="footer-newsletter">
+                <input type="email" name="email_address" aria-label="email" placeholder="Enter your email" required
+                  class="email-field">
+  
+                <button type="submit" class="footer-btn" aria-label="submit">
+                  <ion-icon name="rocket"></ion-icon>
+                </button>
+              </form>
+  
+            </div> -->
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </footer>
+
+</div>
+
+<div class="fullscreen" style="display: none;">
+  <img id="fullscreen-image" src="" alt="Fullscreen Image">
+</div>
+
+<script>
+  const galleryItems = document.querySelectorAll('.gallery-item img');
+  const fullscreenContainer = document.querySelector('.fullscreen');
+  const fullscreenImage = document.getElementById('fullscreen-image');
+
+  let currentImageIndex = 0;
+
+  function showFullscreenImage(index) {
+    fullscreenImage.src = galleryItems[index].src;
+    fullscreenContainer.style.display = 'flex';
+  }
+
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      currentImageIndex = index;
+      showFullscreenImage(currentImageIndex);
+    });
+  });
+
+  fullscreenContainer.addEventListener('click', () => {
+    fullscreenContainer.style.display = 'none';
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
+      currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+      showFullscreenImage(currentImageIndex);
+    } else if (event.key === 'ArrowLeft') {
+      currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+      showFullscreenImage(currentImageIndex);
+    }
+  });
+</script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+</html>

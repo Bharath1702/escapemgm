@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body{
+            background-image: url(../gallery/img/horrorbg.jpg);
+            
+        }
+        /* CSS for responsive layout */
+        .containerabout {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            
+        }
+        .image-container {
+            flex: 1;
+            margin-right: 20px;
+            
+        }
+        .image-container img {
+            width: 150%; /* Set image width to 100% of container */
+            height: auto; /* Maintain aspect ratio */
+            max-width: 600px; /* Limit maximum width */
+            display: block; /* Remove any default spacing */
+            margin: 0 auto; /* Center the image horizontally */
+        }
+        .text-container {
+            flex: 1;
+            font-size: 25px;
+            color: rgb(255, 255, 255);
+            opacity:100000;
+            
+        }
+        @media (max-width: 768px) {
+            .containerabout {
+                flex-direction: column; /* Stack elements vertically on smaller screens */
+            }
+            .image-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            .image-container img {
+                max-width: 100%; /* Set maximum width to container width */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center" style="color: gold;">ABOUT ESCAPE ROOMS</h1>
+    <div class="containerabout">
+        <div class="image-container">
+            <img src="https://escapemgm.com/wp-content/uploads/revslider/homepage/hero-home.jpg" alt="Company Image">
+        </div>
+        <div class="text-container">
+            <p>The concept of Escape Rooms was started in 2011 and we considered introducing it in September 2014. We were surprised to find out that a city like Bangalore didn’t have Escape Rooms.</p>
+            <p>A new concept was introduced in Bangalore in April 2015, and game enthusiasts rejoiced.</p>
+            <p>Since a number of escape room games started appearing in Bangalore city, we named ourselves Escape Room Original. As of today 2023, people still refer to us as being the best escape room in Bangalore because of the buzz, the flow of the game, the quality, and most importantly, customer satisfaction.
+<br><br>
+                You’re at the right place for the best Escape Room experience.</p>
+        </div>
+    </div>
+</body>
+</html>
