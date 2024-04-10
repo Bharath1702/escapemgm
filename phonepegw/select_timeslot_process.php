@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "escapemgm.com";
+$username = "escapemgm_main";
+$password = "Escape@2024";
 $database = "escapemgm_gateway";
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -15,7 +15,7 @@ if (isset($_POST['date_id'])) {
     $dateID = $_POST['date_id'];
 
     // Prepare and execute query to get all booked time slots for the given date
-    $stmt = $conn->prepare("SELECT timeslot FROM bookings WHERE date = ?");
+    $stmt = $conn->prepare("SELECT timeslot FROM bookings WHERE date_id = ?");
     $stmt->bind_param("s", $dateID);
     $stmt->execute();
     $result = $stmt->get_result();

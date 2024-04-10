@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "escapemgm_gateway";
+$database = "gateway";
 $conn = new mysqli($servername, $username, $password, $database);
 
 // Check connection
@@ -16,85 +16,89 @@ if ($conn->connect_error) {
 <!------ Include the above in your HEAD tag ---------->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Font Awesome CSS -->
 <style>
-	select {
-		width: 250px;
-		padding: 8px;
-	}
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  .container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    text-align: center;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  input[type="time"],
+  input[type="tel"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  input[type="submit"] {
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
 </style>
 
+
 <div class="container">
+  <h2>Reservation Form</h2>
+  <form id="reservationForm" method="POST" action="pay.php">
+    <label for="name">Name</label>
+    <input name="name" class="form-control" placeholder="Enter your Name" type="text" required>
 
-	<div class="card bg-light" style="margin-top:50px">
-		<article class="card-body mx-auto" style="max-width: 400px;">
-			<h4 class="card-title mt-3 text-center">Phone pe payment Demo</h4>
+    <label for="email">Email ID</label>
+    <input name="email" class="form-control" placeholder="Email address" type="email" required>
 
+    <label for="date">Date</label>
+    <input name="date" id="date_input" class="form-control" placeholder="Select the date" type="date" required>
 
-			<form method="POST" action="pay.php">
-				<div class="form-group input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"> <i class="fa fa-user"></i> </span>
-					</div>
-					<input name="name" class="form-control" placeholder="Name" type="text">
-				</div> <!-- form-group// -->
-				<div class="form-group input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-					</div>
-					<input name="email" class="form-control" placeholder="Email address" type="email">
-				</div> <!-- form-group// -->
+    <label for="time">Timings</label>
+    <select name="timeslot" id="timeslot" class="form-control" required>
+                        <!-- Add options here -->
+                    </select>
 
+    <label for="phone">Phone Number</label>
+    <input name="mobile" class="form-control" placeholder="Phone number" pattern="[0-9]{10}" type="text" required>
 
-				<div class="form-group input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"> <i class="fa fa-users"></i> </span>
-					</div>
-					<input name="date" id="date_input" class="form-control" placeholder="Select the date" type="date">
-				</div>
+    <label for="players">Number of Players</label>
 
-				<div class="form-group input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"> <i class="fa-solid fa-clock"></i> </span>
-					</div>
-					<select name="timeslot" id="timeslot">
-					</select>
-				</div>
+    <select name="qty" class="form-control" placeholder="Choose the number of players" id="players" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
 
+    <label for="amount">Total Amount</label>
+    <input type="text" id="amount" name="amount" readonly>
 
-				<div class="form-group input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-					</div>
-
-					<input name="mobile" class="form-control" placeholder="Phone number" type="text">
-				</div>
-
-				<div class="form-group input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"> <i class="fa fa-users"></i> </span>
-					</div>
-					<input name="qty" class="form-control" placeholder="No. of players" type="" maxlength="1">
-				</div>
-
-				<!-- form-group// -->
-
-				<div class="form-group input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-					</div>
-					<input name="amount" class="form-control" placeholder="Create password" type="number" value="10">
-				</div> <!-- form-group// -->
-
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-block"> Pay </button>
-				</div> <!-- form-group// -->
-
-			</form>
-
-
-		</article>
-	</div> <!-- card.// -->
-
+    <button type="submit" class="btn btn-primary btn-block"> Pay </button>
+  </form>
 </div>
 <!--container end.//-->
 <script>
@@ -145,4 +149,15 @@ if ($conn->connect_error) {
 			selectElement.add(option);
 		});
 	}
+
+    document.getElementById("reservationForm").addEventListener("change", function(event) {
+    event.preventDefault();
+
+    // Retrieve input values
+    var players = parseInt(document.getElementById("players").value);
+    var amount = players * 1000; // Assuming $10 per player
+
+    // Display total amount
+    document.getElementById("amount").value =amount;
+  });
 </script>

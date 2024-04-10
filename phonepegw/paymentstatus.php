@@ -15,67 +15,31 @@ require_once "./utils/common.php";
 require_once "./utils/SendMail.php";
 
 
-// if (!isset($_SESSION['name'])) {
-//     echo "<h1>Name is not Set.</h1>";
-//     echo var_dump($_SESSION);
-//     exit;
-// }
-
-// if (!isset($_SESSION['email'])) {
-//     echo "<h1>Email is not Set.</h1>";
-//     exit;
-// }
-
-// if (!isset($_SESSION['date'])) {
-//     echo "<h1>Date is not Set.</h1>";
-//     exit;
-// }
-
-// if (!isset($_SESSION['mobile'])) {
-//     echo "<h1>Mobile is not Set.</h1>";
-//     exit;
-// }
-
-// if (!isset($_SESSION['timeslot'])) {
-//     echo "<h1>Timeslot is not Set.</h1>";
-//     exit;
-// }
-
-// if (!isset($_SESSION['qty'])) {
-//     echo "<h1>Quantity is not Set.</h1>";
-//     exit;
-// }
-
-// if (!isset($_SESSION['amount'])) {
-//     echo "<h1>Amount is not Set.</h1>";
-//     exit;
-// }
-
+// Check if the session variable is set
+if(isset($_SESSION['name'])) {
+    $name = $_SESSION['name'];
+    // Proceed with further processing
+} else {
+    echo "Session variable 'name' is not set.";
+}
 if (isset($_POST['merchantId']) && isset($_POST['transactionId']) && isset($_POST['amount'])) {
 
-    $merchantId = $_POST['merchantId'];
+    $merchantId    = $_POST['merchantId'];
     $transactionId = $_POST['transactionId'];
-    $amount = $_POST['amount'];
+    $amount        = $_POST['amount'];
+    
 
-
-
-    // $name = $_POST['name'];
-    // $email = $_POST['email'];
-    // $date = $_POST['date'];
-    // $mobile = $_POST['mobile'];
-    // $qty = $_POST['qty'];
+    $name    =$_SESSION['name']     ; 
+    $email   =$_SESSION['email']    ;  
+    $date    =$_SESSION['date']     ; 
+    $mobile  =$_SESSION['mobile']   ; 
+    $timeslot=$_SESSION['timeslot'] ;  
+    $qty     =$_SESSION['qty']      ;  
+    $amount  =$_SESSION['amount']   ;  
 
 
     
-
-    $name = $_SESSION['name'];
-    $email = $_SESSION['email'];
-    $mobile = $_SESSION['mobile'];
-
-  
-
-
-
+    header("Location: paymentstatus.php");
 
     if (API_STATUS == "LIVE") {
         $url = LIVESTATUSCHECKURL . $merchantId . "/" . $transactionId;
@@ -155,12 +119,37 @@ if (isset($_POST['merchantId']) && isset($_POST['transactionId']) && isset($_POS
         echo "response>>" . $r;
         sleep(3);
 
-        if ($r)
-            header('Location:' . BASE_URL . "success.php?tid=" . $tran_id . "&amount=" . $amount);
-        else
-            header('Location:' . BASE_URL . "success.php?tid=" . $tran_id . "&amount=" . $amount);
-    } else {
+         if ($r){
+            $_SESSION['name']    =$name     ; 
+                $_SESSION['email']   =$email    ;  
+                $_SESSION['date']    =$date     ; 
+                $_SESSION['mobile']  =$mobile   ; 
+                $_SESSION['timeslot']=$timeslot ;  
+                $_SESSION['qty']     =$qty      ;  
+                $_SESSION['amount']  =$amount   ;  
+                $_POST['merchantId']    =$merchantId    ;
+                $_POST['transactionId'] =$transactionId ;
+                header("Location: paymentstatus.php");
+            //  header('Location:' . BASE_URL . "success.php?tid=" . $tran_id . "&amount=" . $amount . "&name=" . $name );
 
-        header('Location:' . BASE_URL . "failure.php?tid=" . $tran_id . "&amount=" . $amount);
-    }
+         }
+         else{
+            $_SESSION['name']    =$name     ; 
+            $_SESSION['email']   =$email    ;  
+            $_SESSION['date']    =$date     ; 
+            $_SESSION['mobile']  =$mobile   ; 
+            $_SESSION['timeslot']=$timeslot ;  
+            $_SESSION['qty']     =$qty      ;  
+            $_SESSION['amount']  =$amount   ;  
+            $_SESSION['merchantId']    =$merchantId    ;
+            $_SESSION['transactionId'] =$transactionId ;
+            header('Location:' . BASE_URL . "success.php?tid=" . $tran_id . "&amount=" . $amount . "&name=" . $name);
+         }
+            
+     } else {
+
+         header('Location:' . BASE_URL . "failure.php?tid=" . $tran_id . "&amount=" . $amount);
+     }
 }
+
+?>

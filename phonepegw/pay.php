@@ -1,9 +1,9 @@
 
 
 <?php
-
 session_start();
-// session_set_cookie_params(3600, '/', '', false, true);
+
+
 
 
 require_once "./utils/config.php";
@@ -12,10 +12,9 @@ require_once "./utils/common.php";
 
 
 $ch = curl_init();
-$url = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+$url = "https://api.phonepe.com/apis/hermes/pg/v1/pay";
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_COOKIE, session_name() . '=' . session_id());
 $response = curl_exec($ch);
 curl_close($ch);
 
@@ -30,74 +29,33 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && 
     $amount = $_POST['amount'];
     $timeslot = $_POST['timeslot'];
 
-    // Set session variables
-    $_SESSION['name'] = $name;
-    $_SESSION['email'] = $email;
-    $_SESSION['date'] = $date;
-    $_SESSION['mobile'] = $mobile;
-    $_SESSION['timeslot'] = $timeslot;
-    $_SESSION['qty'] = $qty;
-    $_SESSION['amount'] = $amount;
-    session_write_close();
+    $_SESSION['name']    =$name     ; 
+    $_SESSION['email']   =$email    ;  
+    $_SESSION['date']    =$date     ; 
+    $_SESSION['mobile']  =$mobile   ; 
+    $_SESSION['timeslot']=$timeslot ;  
+    $_SESSION['qty']     =$qty      ;  
+    $_SESSION['amount']  =$amount   ;  
+    header("Location: paymentstatus.php");
 
-
-    
-    //     if (!isset($_SESSION['name'])) {
-    //         echo "<h1>Name is not Set.</h1>";
-    //         exit;
-    //     }
-    
-    //     if (!isset($_SESSION['email'])) {
-    //         echo "<h1>Email is not Set.</h1>";
-    //         exit;
-    //     }
-    
-    //     if (!isset($_SESSION['date'])) {
-    //         echo "<h1>Date is not Set.</h1>";
-    //         exit;
-    //     }
-    
-    //     if (!isset($_SESSION['mobile'])) {
-    //         echo "<h1>Mobile is not Set.</h1>";
-    //         exit;
-    //     }
-    
-    //     if (!isset($_SESSION['timeslot'])) {
-    //         echo "<h1>Timeslot is not Set.</h1>";
-    //         exit;
-    //     }
-    
-    //     if (!isset($_SESSION['qty'])) {
-    //         echo "<h1>Quantity is not Set.</h1>";
-    //         exit;
-    //     }
-    
-    //     if (!isset($_SESSION['amount'])) {
-    //         echo "<h1>Amount is not Set.</h1>";
-    //         exit;
-    //     }
-    // } else {
-    //     echo "<h1>Your Properties are not set properly in pay.php</h1>";
-    //     exit;
-    // }
-
-//     if(!isset($_SESSION['name'])) {
-//         echo "<h1>Session name is not set</h1>";
-//         exit;
-//     } else {
-//         echo "<h1>Session name is set properly</h1>";
-//         echo $_SESSION['name'];
-//  exit;
-//     }
-
-
-
-    $merchantid  = MERCHANTIDUAT;
-    $saltkey = SALTKEYUAT;
-    $saltindex = SALTINDEX;
+    if($API_STATUS == 'LIVE'){
+        $merchantid  = MERCHANTIDLIVE;
+        $saltkey = SALTKEYLIVE;
+        $saltindex = SALTINDEX;
+    }else{
+        $merchantid  = MERCHANTIDUAT;
+        $saltkey = SALTKEYUAT;
+        $saltindex = SALTINDEX;
+    }    
 
 
     $payLoad = array(
+        'name' => $name,
+        'email' => $email,
+        'date' => $date,
+        'mobile' => $mobile,
+        'qty' => $qty,
+        'timeslot' => $timeslot,
         'merchantId' => $merchantid,
         'merchantTransactionId' => "MT-" . getTransactionID(), // test transactionID
         "merchantUserId" => "M-" . uniqid(),
@@ -113,12 +71,14 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && 
         )
     );
 
+
     $jsonencode = json_encode($payLoad);
 
     $payloadbase64 = base64_encode($jsonencode);
 
     $payloaddata = $payloadbase64 . "/pg/v1/pay" . $saltkey;
 
+    echo "<p> payloadbase64:  ". $payloadbase64 ."</p>";
 
     $sha256 = hash("sha256", $payloaddata);
 
@@ -126,6 +86,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && 
 
     echo $checksum;
 
+    echo "<p> X-verify:   ". $checksum ."</p>";
 
     $request = json_encode(array('request' => $payloadbase64));
 
@@ -173,6 +134,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && 
         print_r($res);
 
         if (isset($res->success) && $res->success == '1') {
+            
             // $paymentCode=$res->code;
             // $paymentMsg=$res->message;
             $payUrl = $res->data->instrumentResponse->redirectInfo->url;

@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "escapemgm_gateway";
+$database = "gateway";
 $conn = new mysqli($servername, $username, $password, $database);
 
 // Check connection
