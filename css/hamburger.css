@@ -8,7 +8,58 @@
     margin: 0;
 }
 
-
+.dropdown {
+    display: inline-block;
+    position: relative;
+    border:none;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-content a {
+    display: block;
+    color: white;
+    padding: 5px;
+    text-decoration: none;
+    border-radius: 10px;
+  }
+  .dropdown-content a:hover {
+    color: #FFFFFF;
+    background-color: #00A4BD;
+  }
+  
+  @media screen and (max-width: 788px) {
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 5px;
+      text-decoration: none;
+      border-radius: 10px;
+      margin-left: 50%;
+      border: 1px solid white;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      left: 80%;
+      width: 80%;
+      overflow: auto;
+      box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+      border: 2px solid white;
+      border-radius: 10px;
+    }
+    
+  }
 
 .navbar input[type="checkbox"],
 .navbar .hamburger-lines{

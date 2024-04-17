@@ -1,6 +1,6 @@
 <?php
 
-define("BASE_URL", "http://localhost/escapemgm/games/ruins_of_hampi/");
+define("BASE_URL", "http://escapemgm.com/games/ruins_of_hampi/");
 define("API_STATUS", "UAT"); //LIVE OR UAT
 define("MERCHANTIDLIVE", "M22LJ64K27TRM");
 define("MERCHANTIDUAT", "PGTESTPAYUAT");  //Sandbox testing 
