@@ -1,6 +1,6 @@
 <?php
 
-define("BASE_URL", "http://escapemgm.com/games/killbill/");
+define("BASE_URL", "https://escapemgm.com/games/killbill/");
 define("API_STATUS", "UAT"); //LIVE OR UAT
 define("MERCHANTIDLIVE", "M22LJ64K27TRM");
 define("MERCHANTIDUAT", "PGTESTPAYUAT");  //Sandbox testing 

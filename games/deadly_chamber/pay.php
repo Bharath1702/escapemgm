@@ -154,7 +154,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && 
 
             // echo "<script>window.location.href='paymentstatus.php?name=".$name."&email=".$email."&date=".$date."&mobile=".$mobile."&qty=$mobile&qty=';</script>";
 
-            header('Location:' . $payUrl);
+            header('Location:'. $payUrl);
         }
     }
 }
