@@ -39,7 +39,7 @@ function hideNotificationPopup() {
 
 // Wait for 10 seconds and then show the notification popup
 setTimeout(showNotificationPopup, 3000);
-setTimeout(hideNotificationPopup, 7000);
+setTimeout(hideNotificationPopup, 15000);
 
 const initSlider = () => {
     const imageList = document.querySelector(".slider-wrapper .image-list");

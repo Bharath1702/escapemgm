@@ -149,7 +149,7 @@
   address { font-style: normal; }
   
   html {
-    font-family: var(--ff-poppins);
+    font-family: var(--ff-oxanium);
     font-size: 10px;
     scroll-behavior: smooth;
   }
@@ -279,7 +279,7 @@
   }
   
   .section-title::after {
-    content: url("../images/title-underline.png");
+    content: url("../assets/images/title-underline.png");
     position: absolute;
     top: 100%;
     left: 50%;

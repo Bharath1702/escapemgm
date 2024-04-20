@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../css/style.css"> -->
-    <link rel="shortcut icon" href="../../Gallary/escapelogo.webp" type="image/x-icon">
-    <link rel="shortcut icon" href="../../Gallary/escapelogo.webp" type="image/x-icon">
-    <title>DEADLY CHAMBER | Escape</title>
+    <link rel="shortcut icon" href="../Gallary/escapelogo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="../Gallary/escapelogo.webp" type="image/x-icon">
+    <title>EVENTS | Escape</title>
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="../../css/hamburger.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../css/hamburger.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet"
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    <script src="../../scripts/script.js"></script>
+    <script src="../scripts/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>  
 <style>
@@ -40,7 +40,7 @@
   }
   .image img {
     width: 100%;
-    height: auto;
+    height: 90%;
   }
   .text {
     /* margin: 10% 0%; */
@@ -159,27 +159,27 @@
         <li><a href="https://escapemgm.com/contactus/">Contact</a></li>
       </ul>
       <a href="https://escapemgm.com/">
-        <img src="../../Gallary/escapelogo.webp" class="logo" alt="logo" height="10px" width="auto">
+        <img src="../Gallary/escapelogo.webp" class="logo" alt="logo" height="10px" width="auto">
       </a>
     </div>
   </nav>
 <hr>
   <br><br><br>
     <center>
-        <h1 >THE DEADLY CHAMBER</h1>
+        <h1> PARTY?? </h1>
     </center>
 <div class="container1">
     
   <div class="image">
-    <img src="../../Gallary/asset/deadly_chamber.webp" alt="Image">
+    <img src="./images/party.jpeg" alt="Image" style="border-radius: 20px;">
   </div>
   <div class="text">
     <!-- <h2>About the Image</h2> -->
-    <p>Run for your life! As you are trapped in the Boiler room with Deadly gases, Escaping is the only
-      way to Survive!!!
-      </p> <br>
+    <p>
 
-        <form id="bookingForm" method="POST" action="pay.php">
+    </p> <br>
+
+        <form id="bookingForm" method="POST" action="event.php">
           <label for="name">Name</label>
           <input name="name" class="form-control" placeholder="Enter your Name" type="text" required>
       
@@ -189,25 +189,23 @@
           <label for="date">Date</label>
           <input name="date" id="date" class="form-control" placeholder="Select the date" type="date" required>
       
-          <label for="time">Timings</label>
-          <select name="timeslot" id="timeslot" class="form-control" required>
-            <!-- Add options here -->
-          </select>
-      
           <label for="phone">Phone Number</label>
           <input name="mobile" class="form-control" placeholder="Phone number" pattern="[0-9]{10}" type="text" required>
-      
+          
+          <label for="event">Event Details</label>
+          <input type="text" name="event" class="form-control" placeholder="EXAMPLE : BREAKUP PARTY">
+
           <label for="players">Number of Players</label>
           <select name="qty" class="form-control" placeholder="Choose the number of players" id="players" required>
+            <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
           </select>
-      
-          <label for="amount">Advance Amount</label>
-          <input type="text" id="amount" name="amount" readonly>
-      
           <input type="submit" placeholder="BOOK" class="btn btn-primary btn-block"></input>
         </form>
     
@@ -379,43 +377,4 @@
 
   </footer>
 </body>
-
-<script>
-document.getElementById('date').addEventListener('change', function() {
-    const selectedDate = this.value;
-    
-    const formData = new FormData();
-    formData.append('date', selectedDate);
-    
-    fetch('./get_timeslots.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(timeslots => {
-        const selectElement = document.getElementById('timeslot');
-        selectElement.innerHTML = '';
-        timeslots.forEach(timeslot => {
-            const option = document.createElement('option');
-            option.value = timeslot.id;
-            option.textContent = timeslot.time;
-            selectElement.appendChild(option);
-        });
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
-document.getElementById("bookingForm").addEventListener("change", function(event) {
-    event.preventDefault();
-
-    // Retrieve input values
-    var players = parseInt(document.getElementById("players").value);
-    var amount = 1 * 1000; // Assuming $10 per player
-
-    // Display total amount
-    document.getElementById("amount").value =amount;
-
-});
-</script>
 </html>
