@@ -149,7 +149,7 @@
   address { font-style: normal; }
   
   html {
-    font-family: var(--ff-oxanium);
+    font-family: 'Times New Roman', Times, serif;
     font-size: 10px;
     scroll-behavior: smooth;
   }
@@ -182,7 +182,7 @@
   .h2,
   .h3 {
     color: var(--white);
-    font-family: var(--ff-oxanium);
+    font-family: 'Times New Roman', Times, serif;
     font-weight: var(--fw-800);
     line-height: 1;
   }
@@ -197,6 +197,7 @@
   .h3 {
     font-size: var(--fs-6);
     text-transform: uppercase;
+    font-family: 'Times New Roman', Times, serif;
   }
   
   :is(.h1, .h2, .h3, .card-price) .span {
@@ -730,7 +731,7 @@
   }
   
   .shop-card .card-price {
-    font-family: var(--ff-oxanium);
+    font-family: 'Times New Roman', Times, serif;
     font-weight: var(--fw-800);
   }
   
@@ -801,7 +802,7 @@
   .blog-card .card-title {
     color: var(--raisin-black-1);
     font-size: var(--fs-5);
-    font-family: var(--ff-oxanium);
+    font-family: 'Times New Roman', Times, serif;
     font-weight: var(--fw-800);
     text-transform: uppercase;
     line-height: 1.2;
@@ -950,7 +951,7 @@
   .footer-list-title {
     position: relative;
     color: var(--silver);
-    font-family: var(--ff-oxanium);
+    font-family: 'Times New Roman', Times, serif;
     text-transform: uppercase;
     font-weight: var(--fw-800);
     padding-block-end: 20px;
@@ -1344,7 +1345,7 @@
   
     .social-title {
       color: var(--white);
-      font-family: var(--ff-oxanium);
+      font-family: 'Times New Roman', Times, serif;
       font-size: var(--fs-8);
       font-weight: var(--fw-700);
     }
