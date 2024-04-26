@@ -75,33 +75,33 @@ $_SESSION['tran_id']=$tran_id;
     {
         //Send Email and redirect to success page
 
-        $now = new DateTime();
-        $timestring = $now->format('d-M-Y h:i:s');
+    //     $now = new DateTime();
+    //     $timestring = $now->format('d-M-Y h:i:s');
 
-        $msg = 'Dear ' . $name . ",<br/>";
-        $msg .= '<br/>We have received your payment and Below is your payment Details<br/> ';
-        $msg .= '<table>';
-        $msg .= '<tr><td>Name:</td><td>' . $name . '</td></tr>';
-        $msg .= '<tr><td>Email:</td><td>' . $email . '</td></tr>';
-        $msg .= '<tr><td>Mobile:</td><td>' . $mobile . '</td></tr>';
-        $msg .= '<tr><td>Amount:</td><td>Rs.' . $amount/100 . '</td></tr>';
-        $msg .= '<tr><td>Transaction id:</td><td>' . $tran_id . '</td></tr>';
-        $msg .= '<tr><td>Date:</td><td>' . $timestring . '</td></tr>';
-        $msg .= '</table><br/>';
+    //     $msg = 'Dear ' . $name . ",<br/>";
+    //     $msg .= '<br/>We have received your payment and Below is your payment Details<br/> ';
+    //     $msg .= '<table>';
+    //     $msg .= '<tr><td>Name:</td><td>' . $name . '</td></tr>';
+    //     $msg .= '<tr><td>Email:</td><td>' . $email . '</td></tr>';
+    //     $msg .= '<tr><td>Mobile:</td><td>' . $mobile . '</td></tr>';
+    //     $msg .= '<tr><td>Amount:</td><td>Rs.' . $amount/100 . '</td></tr>';
+    //     $msg .= '<tr><td>Transaction id:</td><td>' . $tran_id . '</td></tr>';
+    //     $msg .= '<tr><td>Date:</td><td>' . $timestring . '</td></tr>';
+    //     $msg .= '</table><br/>';
 
-        $msg .= '<p>From,</p>';
-        $msg .= '<p>Techmalasi Team</p>';
+    //     $msg .= '<p>From,</p>';
+    //     $msg .= '<p>Techmalasi Team</p>';
 
-        $ob = new Mail();
-       $r =  $ob->sendMail($email, $msg);
+    //     $ob = new Mail();
+    //    $r =  $ob->sendMail($email, $msg);
     //    echo "response>>".$r;
-        sleep(3);
+        // sleep(3);
 
-        if($r)
+        // if($r)
+        // header('Location:success.php');
+        // else
+        // header('Location:success.php');
         header('Location:success.php');
-        else
-        header('Location:success.php');
-
 }
 else {
 

@@ -13,10 +13,10 @@ if(isset($_POST['merchantId']) && isset($_POST['transactionId']) && isset($_SESS
     $transactionId      = $_POST['transactionId'];
     $_SESSION['merchantId'] = $mid;
     $_SESSION['transactionId'] = $tid;
-    
-    
+        echo"$transactionId";
+        echo"contact us with the above reference transaction id";
 }else{
-    echo"variables not set";
+    echo"some error contact us if the payment was complete";
 }
 session_unset();
 session_destroy();
