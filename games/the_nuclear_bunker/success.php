@@ -1,10 +1,20 @@
-<?php 
+<?php
+
 session_start();
-
-
+if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['date']) && isset($_SESSION['timeslot']) && isset($_SESSION['mobile']) && isset($_SESSION['qty']) && isset($_SESSION['amount']) && isset($_SESSION['transactionId']) && isset($_SESSION['tran_id'])) {
+    // Retrieve session variables
+    $name     = $_SESSION['name'];
+    $email    = $_SESSION['email'];
+    $date     = $_SESSION['date'];
+    $timeslot = $_SESSION['timeslot'];
+    $mobile   = $_SESSION['mobile'];
+    $qty      = $_SESSION['qty'];
+    $amount   = $_SESSION['amount'];
+    $transactionId = $_SESSION['transactionId'];
+    $tran_id = $_SESSION['tran_id'];
+}
 ?>
 <html>
-
 <head>
   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
 </head>
@@ -54,114 +64,30 @@ session_start();
     </div>
 
     <h1>Success</h1>
-    <p>name: <?php echo $_SESSION['name'] ?></p>
-    <p>Transaction ID : <?php echo $_GET['tid']; ?></p>
-    <p>Amount : <?php echo $_GET['amount'] / 100; ?></p>
+    <p>Name: <?php echo $name; ?></p>
+    <p>Email: <?php echo $email; ?></p>
+    <p>Date: <?php echo $date; ?></p>
+    <p>Timeslot: <?php echo $timeslot; ?></p>
+    <p>Mobile: <?php echo $mobile; ?></p>
+    <p>No of Players: <?php echo $qty; ?></p>
+    <p>Amount paid : <?php echo $amount; ?></p>
+    <p>Transaction ID: <?php echo $tran_id ?></p>
     <p>We received your purchase request;<br /> we'll be in touch shortly!</p>
 
   </div>
 </body>
 <?php
-include 'db.php';
-
-// Check connection
-
-    $name    =$_SESSION['name']     ; 
-    $email   =$_SESSION['email']    ;  
-    $date    =$_SESSION['date']     ; 
-    $mobile  =$_SESSION['mobile']   ; 
-    $timeslot=$_SESSION['timeslot'] ;  
-    $qty     =$_SESSION['qty']      ;  
-    $amount  =$_SESSION['amount']   ; 
-    $tid = $_GET['tid'];
-
-$name = $_SESSION['name'];
-$email = $_SESSION['email'];
-$date = $_SESSION['date'];
-$timeslot = $_SESSION['timeslot'];
-$mobile = $_SESSION['mobile'];
-$qty = $_SESSION['qty'];
-$amount = $_SESSION['amount'];
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   
-
-// Remove the first 8 characters
-// $date = substr($date, 8);---------//
-
-// Remove leading zero from the day if it's between 1-9
-// $dateParts = explode("-", $date);
-// $day = isset($dateParts[1]) ? $dateParts[1] : '';
-// if (!empty($day) && $day[0] === '0') {
-//     $dateParts[1] = substr($day, 1);
-// }
-// $date = implode("-", $dateParts);
-
-// if ($date === "01") {
-//     $date = 1;
-// } elseif ($date === "02") {
-//     $date = 2;
-// } elseif ($date === "03") {
-//     $date = 3;
-// } elseif ($date === "04") {
-//     $date = 4;
-// } elseif ($date === "05") {
-//     $date = 5;
-// } elseif ($date === "06") {
-//     $date = 6;
-// } elseif ($date === "07") {
-//     $date = 7;
-// } elseif ($date === "08") {
-//     $date = 8;
-// } elseif ($date === "09") {
-//     $date = 9;
-// }
-
-// echo $date; // Output: 3-1
-
-
-
-    // if (!isset($_SESSION['name'])) {
-    //     echo "Please Confirm Your Name";
-    //     exit;
-    // } else if (!isset($email)) {
-    //     echo "Please Confirm Your Email";
-    //     exit;
-    // } else if (!isset($date)) {
-    //     echo "Please Select Your Booking Date";
-    //     exit;
-    // } else if (!isset($timeslot)) {
-    //     echo "Please Select Your Booking Time";
-    //     exit;
-    // } else if (!isset($mobile)) {
-    //     echo "Please Select Your Valid Mobile";
-    //     exit;
-    // } else if (!isset($qty)) {
-    //     echo "Please Select Your Quantity";
-    //     exit;
-    // } else if (!isset($amount)) {
-    //     echo "Please Select Your Amount";
-    //     exit;
-    // }
-
-
-    $stmt = mysqli_prepare($conn, "INSERT INTO the_nuclear_bunker (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
-    $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tid );
+    include "./utils/db.php";
+    $stmt = mysqli_prepare($conn, "INSERT INTO deadly_chamber (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
+    $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tran_id );
     if ($stmt->execute()) {
         echo "<h1> Booking Successfull </h1>";
     } else {
         echo "<h1> Booking Failed </h1>";
         exit;
     }
-            unset($_SESSION['name'])     ; 
-            unset($_SESSION['email']        );   
-            unset($_SESSION['date']         ) ; 
-            unset($_SESSION['mobile']       ) ; 
-            unset($_SESSION['timeslot']     ) ;  
-            unset($_SESSION['qty']          )  ; 
-            unset($_SESSION['amount']       )  ; 
-            unset($_SESSION['merchantId']   ) ;
-            unset($_SESSION['transactionId']) ;
-// }
+session_unset();
+session_destroy();
 ?>
 
 </html>

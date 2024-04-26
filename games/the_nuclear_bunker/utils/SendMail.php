@@ -14,8 +14,8 @@ function sendMail($to='',$msg='')
 	$mail->isSMTP();
 	$mail->Host	 = 'smtp.hostinger.com';
 	$mail->SMTPAuth = true;
-	$mail->Username = '';
-	$mail->Password = '';
+	$mail->Username = 'escapemgm@escapemgm.com';
+	$mail->Password = 'Escape@2024';
 	$mail->SMTPSecure = 'ssl';
 	$mail->Port	 = 465;
 	$mail->setFrom('', 'Techmalasi');

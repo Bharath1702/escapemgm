@@ -1,84 +1,63 @@
-
-
 <?php
-header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
-session_start();
+require './utils/config.php';
+require './utils/common.php';
 
-
-
-
-require_once "./utils/config.php";
-require_once "./utils/common.php";
-
-if(API_STATUS=="LIVE"){ 
+if(API_STATUS == "LIVE"){
     $merchantid  = MERCHANTIDLIVE;
     $saltkey = SALTKEYLIVE;
     $saltindex = SALTINDEX;
-    }else{
-        $merchantid  = MERCHANTIDUAT;
-        $saltkey = SALTKEYUAT;
-        $saltindex = SALTINDEX;
-    }
-
-
-
-//---------------test-----------------------
-
-
+    $url = LIVEURLPAY;
+}else{
+    $merchantid  = MERCHANTIDUAT;
+    $saltkey = SALTKEYUAT;
+    $saltindex = SALTINDEX;
+    $url = UATURLPAY;
+}
 
 $ch = curl_init();
-$url = "";
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($ch);
 curl_close($ch);
 
+if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && isset($_POST['timeslot']) && isset($_POST['mobile']) && isset($_POST['qty']) && isset($_POST['amount'])){
+    echo"success";
+    session_start();
+    $_SESSION['name']    = $_POST['name'];
+    $_SESSION['email']   = $_POST['email'];
+    $_SESSION['date']    = $_POST['date'];
+    $_SESSION['timeslot'] = $_POST['timeslot'];
+    $_SESSION['mobile']   = $_POST['mobile'];
+    $_SESSION['qty']      = $_POST['qty'];
+    $_SESSION['amount']   = $_POST['amount'];  
+    
+    $name    = $_POST['name'];
+    $email   = $_POST['email'];
+    $date    = $_POST['date'];
+    $timeslot= $_POST['timeslot'];
+    $mobile  = $_POST['mobile'];
+    $qty     = $_POST['qty'];
+    $amount  = $_POST['amount'];
 
-
-if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && isset($_POST['mobile']) && isset($_POST['qty']) && isset($_POST['amount'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $date = $_POST['date'];
-    $mobile = $_POST['mobile'];
-    $qty = $_POST['qty'];
-    $amount = $_POST['amount'];
-    $timeslot = $_POST['timeslot'];
-
-    $_SESSION['name']    =$name     ; 
-    $_SESSION['email']   =$email    ;  
-    $_SESSION['date']    =$date     ; 
-    $_SESSION['mobile']  =$mobile   ; 
-    $_SESSION['timeslot']=$timeslot ;  
-    $_SESSION['qty']     =$qty      ;  
-    $_SESSION['amount']  =$amount   ;  
-    header("Location: paymentstatus.php");
-
-    $payLoad = array(
-        'name' => $name,
-        'email' => $email,
-        'date' => $date,
-        'mobile' => $mobile,
-        'qty' => $qty,
-        'timeslot' => $timeslot,
-        'merchantId' => $merchantid,
-        'merchantTransactionId' => "MT-" . getTransactionID(), // test transactionID
-        "merchantUserId" => "M-" . uniqid(),
-        'amount' => $amount * 100, // phone pe works on paise
-        'redirectUrl' => BASE_URL . REDIRECTURL,
-        'redirectMode' => "POST",
-        'callbackUrl' => BASE_URL . REDIRECTURL,
-        "mobileNumber" => $mobile,
-        // "email" => $email,
-        // "param1"=>$email,
-        "paymentInstrument" => array(
-            "type" => "PAY_PAGE",
-        )
-    );
-
-
-    $jsonencode = json_encode($payLoad);
+}else{
+    echo "<script>alert('Please try clearing the browser cache and try agaub')</script>";
+}
+$payLoad = array(
+    'merchantId' => $merchantid,
+    'merchantTransactionId' => "ESCMT-" . getTransactionID(), // test transactionID
+    "merchantUserId" => "M-" . uniqid(),
+    'amount' => $amount * 100, // phone pe works on paise
+    'redirectUrl' => BASE_URL . REDIRECTURL,
+    'redirectMode' => "POST",
+    'callbackUrl' => BASE_URL . REDIRECTURL,
+    "mobileNumber" => $mobile,
+    // "email" => $email,
+    // "param1"=>$email,
+    "paymentInstrument" => array(
+        "type" => "PAY_PAGE",
+    )
+);
+$jsonencode = json_encode($payLoad);
 
     $payloadbase64 = base64_encode($jsonencode);
 
@@ -95,19 +74,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && 
     echo "<p> X-verify:   ". $checksum ."</p>";
 
     $request = json_encode(array('request' => $payloadbase64));
-
-    $url = '';
-    if (API_STATUS == "LIVE") {
-        $url = LIVEURLPAY;
-    } else {
-        $url = UATURLPAY;
-    }
-
     echo "<br/>" . $url;
-
-
-
-
     $curl = curl_init(); // This extention should be installed
 
     curl_setopt_array($curl, [
@@ -126,6 +93,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && 
         ],
     ]);
 
+    
     $response = curl_exec($curl);
 
     $err = curl_error($curl);
@@ -140,21 +108,8 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && 
         print_r($res);
 
         if (isset($res->success) && $res->success == '1') {
-            
-            // $paymentCode=$res->code;
-            // $paymentMsg=$res->message;
             $payUrl = $res->data->instrumentResponse->redirectInfo->url;
-
-            //  $name = $_REQUEST['name'];
-            //  $email = $_REQUEST['email'];
-            //  $date = $_REQUEST['date'];
-            //  $mobile = $_REQUEST['mobile'];
-            // $qty = $_REQUEST['qty'];
-            // $amount = $_REQUEST['amount'];
-
-            // echo "<script>window.location.href='paymentstatus.php?name=".$name."&email=".$email."&date=".$date."&mobile=".$mobile."&qty=$mobile&qty=';</script>";
-
             header('Location:' . $payUrl);
         }
     }
-}
+?>
