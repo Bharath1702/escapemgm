@@ -105,7 +105,7 @@ $jsonencode = json_encode($payLoad);
         $res = json_decode($response);
 
         // echo "<br/>response===";
-        print_r($res);
+        // print_r($res);
 
         if (isset($res->success) && $res->success == '1') {
             $payUrl = $res->data->instrumentResponse->redirectInfo->url;

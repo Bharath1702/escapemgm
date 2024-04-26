@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['date']) && isset($_SESSION['timeslot']) && isset($_SESSION['mobile']) && isset($_SESSION['qty']) && isset($_SESSION['amount']) && isset($_SESSION['transactionId']) && isset($_SESSION['tran_id'])) {
     // Retrieve session variables
@@ -56,7 +55,6 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
     margin: 0 auto;
   }
 </style>
-
 <body>
   <div class="card">
     <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
