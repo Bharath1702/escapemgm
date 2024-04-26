@@ -78,7 +78,7 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
 </body>
 <?php
     include "./utils/db.php";
-    $stmt = mysqli_prepare($conn, "INSERT INTO deadly_chamber (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
+    $stmt = mysqli_prepare($conn, "INSERT INTO ruins_of_hampi (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
     $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tran_id );
     if ($stmt->execute()) {
         echo "<h1> Booking Successfull </h1>";

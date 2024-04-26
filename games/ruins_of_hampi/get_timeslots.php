@@ -1,7 +1,7 @@
 <?php
 include './utils/db.php';
 $date = $_POST['date'];
-$sql = "SELECT id, time FROM timeslots WHERE id NOT IN (SELECT timeslot_id FROM deadly_chamber WHERE date = '$date')";
+$sql = "SELECT id, time FROM timeslots WHERE id NOT IN (SELECT timeslot_id FROM ruins_of_hampi WHERE date = '$date')";
 $result = $conn->query($sql);
 $timeslots = [];
 if ($result->num_rows > 0) {
