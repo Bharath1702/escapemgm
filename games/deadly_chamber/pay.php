@@ -21,7 +21,7 @@ $response = curl_exec($ch);
 curl_close($ch);
 
 if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && isset($_POST['timeslot']) && isset($_POST['mobile']) && isset($_POST['qty']) && isset($_POST['amount'])){
-    echo"success";
+    // echo"success";
     session_start();
     $_SESSION['name']    = $_POST['name'];
     $_SESSION['email']   = $_POST['email'];
@@ -109,7 +109,7 @@ $jsonencode = json_encode($payLoad);
 
         if (isset($res->success) && $res->success == '1') {
             $payUrl = $res->data->instrumentResponse->redirectInfo->url;
-            header('Location:'.$payUrl);
+            header('Location:' . $payUrl);
         }
     }
 ?>
