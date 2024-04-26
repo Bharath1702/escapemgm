@@ -61,9 +61,9 @@ curl_close($curl);
 
 $responsePayment = json_decode($resp, true);
 
-echo "<pre>";
-print_r($responsePayment);
-echo "</pre>";
+// echo "<pre>";
+// print_r($responsePayment);
+// echo "</pre>";
 
 
 $tran_id = $responsePayment['data']['transactionId'];
@@ -74,10 +74,8 @@ $_SESSION['tran_id']=$tran_id;
     if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS")
     {
         //Send Email and redirect to success page
-
         $now = new DateTime();
         $timestring = $now->format('d-M-Y h:i:s');
-
         $msg = 'Dear ' . $name . ",<br/>";
         $msg .= '<br/>We have received your payment and Below is your payment Details<br/> ';
         $msg .= '<table>';
@@ -88,31 +86,21 @@ $_SESSION['tran_id']=$tran_id;
         $msg .= '<tr><td>Transaction id:</td><td>' . $tran_id . '</td></tr>';
         $msg .= '<tr><td>Date:</td><td>' . $timestring . '</td></tr>';
         $msg .= '</table><br/>';
-
         $msg .= '<p>From,</p>';
         $msg .= '<p>Techmalasi Team</p>';
-
         $ob = new Mail();
        $r =  $ob->sendMail($email, $msg);
        echo "response>>".$r;
         sleep(3);
-
         if($r)
         header('Location:success.php');
         else
         header('Location:success.php');
-
 }
 else {
-
     header('Location:' . BASE_URL . "failure.php?tid=" . $tran_id . "&amount=" . $amount);
-
     }
-
-
 }else{
     echo"values not properly set";
 }
-
-
 ?>
