@@ -1,6 +1,6 @@
 <?php
 define("DB_MODE","TEST"); //TEST or LIVE
-define("BASE_URL", "https://localhost/games/killbill/");
+define("BASE_URL", "https://escapemgm.com/games/killbill/");
 define("API_STATUS", "TEST"); //LIVE OR UAT
 define("MERCHANTIDLIVE", "M22LJ64K27TRM");
 define("MERCHANTIDUAT", "PGTESTPAYUAT");  //Sandbox testing 
