@@ -16,7 +16,7 @@ if(isset($_POST['merchantId']) && isset($_POST['transactionId']) && isset($_SESS
         $transactionId      = $_POST['transactionId'];
         $_SESSION['merchantId'] = $merchantId;
         $_SESSION['transactionId'] = $transactionId;
-        echo"everything properly set";
+        // echo"everything properly set";
 
 if (API_STATUS == "LIVE") {
     $url = LIVESTATUSCHECKURL . $merchantId . "/" . $transactionId;
@@ -94,7 +94,7 @@ $_SESSION['tran_id']=$tran_id;
 
         $ob = new Mail();
        $r =  $ob->sendMail($email, $msg);
-       echo "response>>".$r;
+    //    echo "response>>".$r;
         sleep(3);
 
         if($r)
