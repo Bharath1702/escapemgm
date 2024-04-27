@@ -1,5 +1,5 @@
 <?php
-define("DB_MODE","TEST"); //TEST or LIVE
+define("DB_MODE","LIVE"); //TEST or LIVE
 define("BASE_URL", "https://escapemgm.com/games/ransom/");
 define("API_STATUS", "TEST"); //LIVE OR UAT
 define("MERCHANTIDLIVE", "M22LJ64K27TRM");
