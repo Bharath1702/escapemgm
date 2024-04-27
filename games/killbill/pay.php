@@ -21,7 +21,7 @@ $response = curl_exec($ch);
 curl_close($ch);
 
 if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['date']) && isset($_POST['timeslot']) && isset($_POST['mobile']) && isset($_POST['qty']) && isset($_POST['amount'])){
-    echo"success";
+    // echo"success";
     session_start();
     $_SESSION['name']    = $_POST['name'];
     $_SESSION['email']   = $_POST['email'];
@@ -63,18 +63,18 @@ $jsonencode = json_encode($payLoad);
 
     $payloaddata = $payloadbase64 . "/pg/v1/pay" . $saltkey;
 
-    echo "<p> payloadbase64:  ". $payloadbase64 ."</p>";
+    // echo "<p> payloadbase64:  ". $payloadbase64 ."</p>";
 
     $sha256 = hash("sha256", $payloaddata);
 
     $checksum = $sha256 . '###' . $saltindex;
 
-    echo $checksum;
+    // echo $checksum;
 
-    echo "<p> X-verify:   ". $checksum ."</p>";
+    // echo "<p> X-verify:   ". $checksum ."</p>";
 
     $request = json_encode(array('request' => $payloadbase64));
-    echo "<br/>" . $url;
+    // echo "<br/>" . $url;
     $curl = curl_init(); // This extention should be installed
 
     curl_setopt_array($curl, [
@@ -104,8 +104,8 @@ $jsonencode = json_encode($payLoad);
     } else {
         $res = json_decode($response);
 
-        echo "<br/>response===";
-        print_r($res);
+        // echo "<br/>response===";
+        // print_r($res);
 
         if (isset($res->success) && $res->success == '1') {
             $payUrl = $res->data->instrumentResponse->redirectInfo->url;

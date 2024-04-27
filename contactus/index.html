@@ -2,27 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="shortcut icon" href="../Gallary/escapelogo.webp" type="image/x-icon">
-  <title>Shipping, Refund and Return Policy | ESCAPE ROOM</title>
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
-  <link rel="stylesheet" href="../css/hamburger.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
-  <style>
-    .paragraph {
-        color: white !important;
-        text-align:center;
-        margin: 0px 20px;
-        /* margin-top: 30%; */
-    }
-  </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <link rel="shortcut icon" href="../Gallary/escapelogo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="../Gallary/escapelogo.webp" type="image/x-icon">
+    <title>EVENTS | Escape</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../css/hamburger.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet"
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <script src="../scripts/script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>  
+    <style>
+      body {font-family: Arial, Helvetica, sans-serif;color: white;}
+      * {box-sizing: border-box;}
+
+      
+      input[type=text], select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccccccdc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+        color: black;
+        background-color: rgba(255, 255, 255, 0.849);
+      }
+      
+      input[type=mail]{
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccccccdc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+        color: black;
+        background-color: rgba(255, 255, 255, 0.849);
+      }
+      input[type=submit] {
+        background-color: #04AA6D;
+        color: black;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      input[type=submit]:hover {
+        background-color: #45a049;
+      }
+      
+      .container1 {
+        border-radius: 5px;
+        background-color: black;
+        padding: 20px;
+      }
+      </style>
 </head>
 <body>
-    <nav class="navbar">
+  <nav class="navbar">
     <div class="navbar-container container">
       <input type="checkbox" name="" id="">
       <div class="hamburger-lines">
@@ -51,190 +97,190 @@
         <img src="../Gallary/escapelogo.webp" class="logo" alt="logo" height="10px" width="auto">
       </a>
     </div>
-  </nav><br><br><br><br>
+  </nav>
+<hr>
+  <br><br><br>
+    <center>
+        <h1> CONTACT US </h1>
+    </center>
+    <div class="container1">
+      <form action="./contact.php" method="post">
+        <label for="fname">Full Name :</label>
+        <input type="text" id="fname" required name="name" placeholder="Your name..">
+    
+        <label for="lname">E-Mail:</label>
+        <input type="mail" id="lname" name="mail" placeholder="Enter your email" required>
+    
+    
+        <label for="subject">Subject :</label>
+        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" required></textarea>
+    
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+<hr><br>
+<footer class="footer">
+    <div class="footer-top">
       <div class="container">
-        
-      </div>
-      <br><br>
 
-      <footer class="footer">
+        <div class="footer-brand">
 
-        <div class="footer-top">
-          <div class="container">
-    
-            <div class="footer-brand">
-    
-              <a href="https://escapemgm.com" class="flogo">ESCAPE ROOM</a>
-    
-              <p class="footer-text">
-                The game never ends
-              </p>
-    
-              <ul class="contact-list">
-    
-                <li class="contact-item">
-                  <div class="contact-icon">
-                    <ion-icon name="location"></ion-icon>
-                  </div>
-    
-                  <address class="item-text">
-                    Address : No 12, 3rd Floor Pragati Mansion, 1st Cross Rd, 5th Block, Koramangala, Karnataka 560034
-                  </address>
-                </li>
-    
-                <li class="contact-item">
-                  <div class="contact-icon">
-                    <ion-icon name="headset"></ion-icon>
-                  </div>
-    
-                  <a href="tel:+917676372273" class="item-text">Phone : +91 76763 72273</a>
-                </li>
-    
-                <li class="contact-item">
-                  <div class="contact-icon">
-                    <ion-icon name="mail-open"></ion-icon>
-                  </div>
-    
-                  <a href="mailto:escaperoombangalore@gmail.com" class="item-text">Email : escaperoombangalore@gmail.com</a>
-                </li>
-    
-              </ul>
-    
-            </div>
-    
-            <ul class="footer-list">
-    
-              <li>
-                <p class="footer-list-title">Usefull Links</p>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/" class="footer-link">Home</a>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/#shop" class="footer-link">About</a>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/gallery/" class="footer-link">Gallery</a>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/events/" class="footer-link">Events</a>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/whats-coming-next/" class="footer-link">Whats Coming</a>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/contactus/" class="footer-link">Contact Us</a>
-              </li>
-    
-            </ul>
-    
-            <ul class="footer-list">
-    
-              <li>
-                <p class="footer-list-title">Need Help?</p>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/t&c/" class="footer-link">Terms & Conditions</a>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/sr/" class="footer-link">Shipping, Returns & Refunds</a>
-              </li>
-    
-              <li>
-                <a href="https://escapemgm.com/rp/" class="footer-link">Privacy Policy</a>
-              </li>
-    
-              <!-- <li>
-                  <a href="#" class="footer-link">Affiliate</a>
-                </li>
-      
-                <li>
-                  <a href="#" class="footer-link">Use Cases</a>
-                </li> -->
-    
-            </ul>
-    
-            <div class="footer-wrapper">
-    
-              <div class="social-wrapper">
-    
-                <p class="footer-list-title">Follow Us</p>
-    
-                <ul class="social-list">
-    
-                  <li>
-                    <a href="https://www.facebook.com/INEscapeRoom/" class="social-link" style="background-color: #3b5998">
-                      <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                  </li>
-    
-                  <li>
-                    <a href="https://www.instagram.com/inescaperoom/" class="social-link" style="background-color: #55acee">
-                      <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                  </li>
-    
-                  <!-- <li>
-                      <a href="#" class="social-link" style="background-color: #d71e18">
-                        <ion-icon name="logo-pinterest"></ion-icon>
-                      </a>
-                    </li>
-      
-                    <li>
-                      <a href="#" class="social-link" style="background-color: #1565c0">
-                        <ion-icon name="logo-linkedin"></ion-icon>
-                      </a>
-                    </li> -->
-    
-                </ul>
-    
+          <a href="https://escapemgm.com" class="flogo">ESCAPE ROOM</a>
+
+          <p class="footer-text">
+            The game never ends
+          </p>
+
+          <ul class="contact-list">
+
+            <li class="contact-item">
+              <div class="contact-icon">
+                <ion-icon name="location"></ion-icon>
               </div>
-    
-              <!-- <div class="footer-newsletter">
-      
-                  <p class="footer-list-title">Newsletter Sign Up</p>
-      
-                  <form action="" class="footer-newsletter">
-                    <input type="email" name="email_address" aria-label="email" placeholder="Enter your email" required
-                      class="email-field">
-      
-                    <button type="submit" class="footer-btn" aria-label="submit">
-                      <ion-icon name="rocket"></ion-icon>
-                    </button>
-                  </form>
-      
-                </div> -->
-    
-            </div>
-    
-          </div>
+
+              <address class="item-text">
+                Address : No 12, 3rd Floor Pragati Mansion, 1st Cross Rd, 5th Block, Koramangala, Karnataka 560034
+              </address>
+            </li>
+
+            <li class="contact-item">
+              <div class="contact-icon">
+                <ion-icon name="headset"></ion-icon>
+              </div>
+
+              <a href="tel:+917676372273" class="item-text">Phone : +91 76763 72273</a>
+            </li>
+
+            <li class="contact-item">
+              <div class="contact-icon">
+                <ion-icon name="mail-open"></ion-icon>
+              </div>
+
+              <a href="mailto:escaperoombangalore@gmail.com" class="item-text">Email : escaperoombangalore@gmail.com</a>
+            </li>
+
+          </ul>
+
         </div>
-    
-    
-    
-      </footer>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Usefull Links</p>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/" class="footer-link">Home</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/#shop" class="footer-link">About</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/gallery/" class="footer-link">Gallery</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/events/" class="footer-link">Bulk booking</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/whats-coming-next/" class="footer-link"></a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/contactus/" class="footer-link">Contact Us</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Need Help?</p>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/t&c/" class="footer-link">Terms & Conditions</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/sr/" class="footer-link">Shipping, Returns & Refunds</a>
+          </li>
+
+          <li>
+            <a href="https://escapemgm.com/rp/" class="footer-link">Privacy Policy</a>
+          </li>
+
+          <!-- <li>
+              <a href="#" class="footer-link">Affiliate</a>
+            </li>
+  
+            <li>
+              <a href="#" class="footer-link">Use Cases</a>
+            </li> -->
+
+        </ul>
+
+        <div class="footer-wrapper">
+
+          <div class="social-wrapper">
+
+            <p class="footer-list-title">Follow Us</p>
+
+            <ul class="social-list">
+
+              <li>
+                <a href="https://www.facebook.com/INEscapeRoom/" class="social-link" style="background-color: #3b5998">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="https://www.instagram.com/inescaperoom/" class="social-link" style="background-color: #55acee">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+              </li>
+
+              <!-- <li>
+                  <a href="#" class="social-link" style="background-color: #d71e18">
+                    <ion-icon name="logo-pinterest"></ion-icon>
+                  </a>
+                </li>
+  
+                <li>
+                  <a href="#" class="social-link" style="background-color: #1565c0">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a>
+                </li> -->
+
+            </ul>
+
+          </div>
+
+          <!-- <div class="footer-newsletter">
+  
+              <p class="footer-list-title">Newsletter Sign Up</p>
+  
+              <form action="" class="footer-newsletter">
+                <input type="email" name="email_address" aria-label="email" placeholder="Enter your email" required
+                  class="email-field">
+  
+                <button type="submit" class="footer-btn" aria-label="submit">
+                  <ion-icon name="rocket"></ion-icon>
+                </button>
+              </form>
+  
+            </div> -->
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </footer>
 </body>
-<script src="../assets/js/script.js" defer></script>
-
-  <!-- 
-      - ionicon link
-    -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-  <script src="../scripts/script.js"></script>
-  <!-- Include Font Awesome CSS via CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-
 </html>

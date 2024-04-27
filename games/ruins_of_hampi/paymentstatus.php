@@ -61,9 +61,9 @@ curl_close($curl);
 
 $responsePayment = json_decode($resp, true);
 
-echo "<pre>";
-print_r($responsePayment);
-echo "</pre>";
+// echo "<pre>";
+// print_r($responsePayment);
+// echo "</pre>";
 
 
 $tran_id = $responsePayment['data']['transactionId'];
@@ -105,13 +105,13 @@ $_SESSION['tran_id']=$tran_id;
 }
 else {
 
-    header('Location:' . BASE_URL . "failure.php?tid=" . $tran_id . "&amount=" . $amount);
+    header('Location:failuer.php');
 
     }
 
 
 }else{
-    echo"values not properly set";
+    echo"Try again ...";
 }
 
 

@@ -99,9 +99,9 @@ $_SESSION['tran_id']=$tran_id;
         header('Location:success.php');
 }
 else {
-    header('Location:' . BASE_URL . "failure.php?tid=" . $tran_id . "&amount=" . $amount);
+    header('Location:failuer.php');
     }
 }else{
-    echo"values not properly set";
+    echo"Retry again....";
 }
 ?>
