@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Retrieve data for next 2 days
 $today = date("Y-m-d");
-$twoDaysLater = date("Y-m-d", strtotime("+2 days"));
+$twoDaysLater = date("Y-m-d", strtotime("+14 days"));
 
 $sql = "SELECT * FROM deadly_chamber WHERE date BETWEEN '$today' AND '$twoDaysLater'";
 $result = $conn->query($sql);

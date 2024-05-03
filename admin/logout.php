@@ -1,5 +1,5 @@
 <?php
-session_unset();
-session_destroy();
-header('Location:index.html')
+    session_unset();
+    session_destroy();
+    echo "<script>window.location.href = 'index.html';</script>";
 ?>

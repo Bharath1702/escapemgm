@@ -2,6 +2,7 @@
 require_once "./utils/config.php";
 require_once "./utils/common.php";
 require_once "./utils/SendMail.php";
+include "./utils/db.php";
 session_start();
 if(isset($_POST['merchantId']) && isset($_POST['transactionId']) && isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['date']) && isset($_SESSION['timeslot']) && isset($_SESSION['mobile']) && isset($_SESSION['qty']) && isset($_SESSION['amount']))
     {
@@ -74,10 +75,8 @@ $_SESSION['tran_id']=$tran_id;
     if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS")
     {
         //Send Email and redirect to success page
-
     //     $now = new DateTime();
     //     $timestring = $now->format('d-M-Y h:i:s');
-
     //     $msg = 'Dear ' . $name . ",<br/>";
     //     $msg .= '<br/>We have received your payment and Below is your payment Details<br/> ';
     //     $msg .= '<table>';
@@ -88,32 +87,32 @@ $_SESSION['tran_id']=$tran_id;
     //     $msg .= '<tr><td>Transaction id:</td><td>' . $tran_id . '</td></tr>';
     //     $msg .= '<tr><td>Date:</td><td>' . $timestring . '</td></tr>';
     //     $msg .= '</table><br/>';
-
     //     $msg .= '<p>From,</p>';
     //     $msg .= '<p>Techmalasi Team</p>';
-
     //     $ob = new Mail();
     //    $r =  $ob->sendMail($email, $msg);
     //    echo "response>>".$r;
         // sleep(3);
-
         // if($r)
         // header('Location:success.php');
+    include "./utils/db.php";
         // else
         // header('Location:success.php');
+    include "./utils/db.php";
+    $stmt = mysqli_prepare($conn, "INSERT INTO ransom (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
+    $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tran_id );
+    if ($stmt->execute()) {
+        echo "<h1> Booking Successfull </h1>";
+    } else {
+        echo "<h1> Booking Failed </h1>";
+        exit;
+    }
         header('Location:success.php');
-
 }
 else {
-
     header('Location:failuer.php');
-
     }
-
-
 }else{
-    echo"values not properly set";
+    echo"Retry again....";
 }
-
-
 ?>

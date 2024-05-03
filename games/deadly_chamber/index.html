@@ -17,120 +17,8 @@
     <script src="../../scripts/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>  
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  }
-  .container1 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-  }
-  .image {
-    flex: 0 0 50%;
-    max-width: 50%;
-    margin-right: 20px;
-  }
-  .image img {
-    width: 100%;
-    height: auto;
-  }
-  .text {
-    /* margin: 10% 0%; */
-    flex: 0 0 calc(50% - 20px); /* Adjusted width to account for margin */
-    max-width: calc(50% - 20px); /* Adjusted width to account for margin */
-  }
-  .button-container {
-    text-align: center;
-    margin-top: 20px;
-    width: 100%;
-  }
-  .button1 {
-    padding: 10px 20px;
-    background-color: gold;
-    color: black;
-    border: 2px solid white;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 30%;
-    align-items: center;
-
-  }
-
-  @media (max-width: 768px) {
-    .container1 {
-      flex-direction: column;
-      align-items: center;
-    }
-    .image, .text {
-      margin-right: 0;
-      max-width: 100%;
-    }
-    .button1{
-        margin-top: -10%;
-    }
-  }
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  input[type="text"],
-  input[type="email"],
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    background-color: white;
-  }
-  input[type="date"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    background-color: white;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    
-  }
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    background-image: none;
-  }
-  input[type="text"]:invalid {
-    border-color: red;
-  }
-  input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  input[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-
-</style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
   <nav class="navbar">
@@ -150,12 +38,12 @@
             <a>Bulk Booking</a> 
           </ul>
           <div class="dropdown-content">
-          <a href="https://escapemgm.com/events/">Birthday?</a>
-          <a href="https://escapemgm.com/events/">Parties?</a>
-          <!-- <a href="https://www.youtube.com/user/hubspot">YouTube</a> -->
+          <a href="https://escapemgm.com/events/birthday/">Birthday?</a>
+          <a href="https://escapemgm.com/events/party/">Parties?</a>a
+          <a href="https://escapemgm.com/event/corporate/">Corporate Booking</a>        
           </div>
         </div></li>
-        <li><a href="https://escapemgm.com/whats-coming-next/">What's coming</a></li>
+        <li><a href="https://escapemgm.com/price_chart/">Price List</a></li>
         <li><a href="https://escapemgm.com/contactus/">Contact</a></li>
       </ul>
       <a href="https://escapemgm.com/">
@@ -166,8 +54,8 @@
 <hr>
   <br><br><br>
     <center>
-        <h1 >THE DEADLY CHAMBER</h1>
-    </center>
+        <h1 class="section-title">THE DEADLY CHAMBER</h1>
+    </center><br><br><br>
 <div class="container1">
   <div class="image">
     <img src="../../Gallary/asset/deadly_chamber.webp" alt="Image">
@@ -176,42 +64,95 @@
     <!-- <h2>About the Image</h2> --> 
     <p>Run for your life! As you are trapped in the Boiler room with Deadly gases, Escaping is the only
       way to Survive!!!
+      <center><h2>Game Details</h2></center>
+      <p class="card-price">
+                      <ul style="color: white;font-size: 25px;">
+                        <li>60 Mins. <br></li>
+                        <li>Genere : Daring </li>
+                        <li>Team : 2-5 People</li>
+                        <li>Age : 8+</li>
+                        <li>Difficulty level: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                        </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                        </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                        </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                        </svg></li>
+                      <li>Frustration level: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                      </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                      </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                      </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                      </svg> </li>
+                      <li>Screw up probability: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                      </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                      </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                        <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"/>
+                      </svg></li>
+                      </ul>
+                      </p> <br>
+                      <center>
+                        <a href="#bookingForm" id="booknow">BOOK NOW</a>
+                      </center>
+      
       </p> <br>
-
-        <form id="bookingForm" method="POST" action="pay.php">
-          <label for="name">Name</label>
-          <input name="name" class="form-control" placeholder="Enter your Name" type="text" required>
-      
-          <label for="email">Email ID</label>
-          <input name="email" class="form-control" placeholder="Email address" type="email" required>
-      
-          <label for="date">Date</label>
-          <input name="date" id="date" class="form-control" placeholder="Select the date" type="date" required>
-      
-          <label for="time">Timings</label>
-          <select name="timeslot" id="timeslot" class="form-control" required>
-            <!-- Add options here -->
-          </select>
-      
-          <label for="phone">Phone Number</label>
-          <input name="mobile" class="form-control" placeholder="Phone number" pattern="[0-9]{10}" type="text" required>
-      
-          <label for="players">Number of Players</label>
-          <select name="qty" class="form-control" placeholder="Choose the number of players" id="players" required>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-      
-          <label for="amount">Advance Amount</label>
-          <input type="text" id="amount" name="amount" readonly>
-      
-          <input type="submit" placeholder="BOOK" class="btn btn-primary btn-block"></input>
-        </form>
     
   </div>
 </div>
+
+
+  <div class="testbox">
+    <form id="bookingForm" method="POST" action="pay.php" class="form-container">
+      <div class="item">
+        <p>No. of Players</p>
+        <select name="qty" class="form-control" placeholder="Choose the number of players" id="players" required>
+        <option value></option>  
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+  </select>
+      </div>
+      <div class="item">
+        <p>Select Date</p>
+        <input name="date" id="date" class="form-control" placeholder="Select the date" type="date" required/>
+        <i class="fas fa-calendar-alt"></i>
+      </div>
+      <div class="item">
+        <p>Select Timeslot</p>
+        <select name="timeslot" id="timeslot" class="form-control" required>
+    <!-- Add options here -->
+  </select>
+      </div>
+      <div class="item">
+        <p>Name</p>
+        <div class="name-item">
+          <input name="name" class="form-control" placeholder="Enter your Name" type="text" required/>
+          <input name="mobile" class="form-control" placeholder="Phone number" pattern="[0-9]{10}" type="text" required/>
+        </div>
+      </div>
+      <div class="item">
+        <p>Email</p>
+        <input name="email" class="form-control" placeholder="Email address" type="email" required/>
+       </div>
+
+        <div class="item">
+          <p>Advance amount</p>
+          <input type="text" id="amount" name="amount" value="1000" readonly/>
+        </div>
+      <div class="btn-block">
+        <input type="submit" value="BOOK" class="btn btn-primary btn-block">
+      </div>
+    </form>
+  </div>
+<br><br>
 <hr><br>
 <footer class="footer">
 
@@ -277,7 +218,7 @@
           </li>
 
           <li>
-            <a href="https://escapemgm.com/events/" class="footer-link">Bulk booking</a>
+            <!-- <a href="https://escapemgm.com/events/" class="footer-link">Bulk booking</a> -->
           </li>
 
           <li>
@@ -300,8 +241,8 @@
             <a href="https://escapemgm.com/t&c/" class="footer-link">Terms & Conditions</a>
           </li>
 
-          <li>
-            <a href="https://escapemgm.com/sr/" class="footer-link">Shipping, Returns & Refunds</a>
+          <!-- <li>
+            <!-- <a href="https://escapemgm.com/sr/" class="footer-link">Shipping, Returns & Refunds</a> -->
           </li>
 
           <li>
@@ -377,6 +318,9 @@
 
 
   </footer>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
 </body>
 
 <script>

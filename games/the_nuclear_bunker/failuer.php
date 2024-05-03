@@ -16,6 +16,7 @@ if(isset($_POST['merchantId']) && isset($_POST['transactionId']) && isset($_SESS
     echo"$transactionId";
     echo"contact us with the above reference transaction id";
     
+    
 }else{
     echo"some error contact us if the payment was complete";
 }

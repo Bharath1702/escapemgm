@@ -75,15 +75,6 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
   </div>
 </body>
 <?php
-    include "./utils/db.php";
-    $stmt = mysqli_prepare($conn, "INSERT INTO deadly_chamber (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
-    $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tran_id );
-    if ($stmt->execute()) {
-        echo "<h1> Booking Successfull </h1>";
-    } else {
-        echo "<h1> Booking Failed </h1>";
-        exit;
-    }
 session_unset();
 session_destroy();
 ?>

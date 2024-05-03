@@ -1,7 +1,6 @@
 <?php
-define("DB_MODE","LIVE"); //TEST or LIVE
 define("BASE_URL", "https://escapemgm.com/games/the_nuclear_bunker/");
-define("API_STATUS", "TEST"); //LIVE OR UAT
+define("API_STATUS", "UAT"); //LIVE OR UAT
 define("MERCHANTIDLIVE", "M22LJ64K27TRM");
 define("MERCHANTIDUAT", "PGTESTPAYUAT");  //Sandbox testing 
 define("SALTKEYLIVE", "bb0e4def-61cc-47cf-aef9-03b4cba84a85");

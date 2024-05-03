@@ -74,10 +74,8 @@ $_SESSION['tran_id']=$tran_id;
     if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS")
     {
         //Send Email and redirect to success page
-
     //     $now = new DateTime();
     //     $timestring = $now->format('d-M-Y h:i:s');
-
     //     $msg = 'Dear ' . $name . ",<br/>";
     //     $msg .= '<br/>We have received your payment and Below is your payment Details<br/> ';
     //     $msg .= '<table>';
@@ -88,31 +86,31 @@ $_SESSION['tran_id']=$tran_id;
     //     $msg .= '<tr><td>Transaction id:</td><td>' . $tran_id . '</td></tr>';
     //     $msg .= '<tr><td>Date:</td><td>' . $timestring . '</td></tr>';
     //     $msg .= '</table><br/>';
-
     //     $msg .= '<p>From,</p>';
     //     $msg .= '<p>Techmalasi Team</p>';
-
     //     $ob = new Mail();
     //    $r =  $ob->sendMail($email, $msg);
     //    echo "response>>".$r;
         // sleep(3);
-
         // if($r)
         // header('Location:success.php');
         // else
         // header('Location:success.php');
+    include "./utils/db.php";
+    $stmt = mysqli_prepare($conn, "INSERT INTO killbill (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
+    $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tran_id );
+    if ($stmt->execute()) {
+        echo "<script>alert('booking Successful');</script>";
         header('Location:success.php');
+    } else {
+        echo "<script>alert('oops something went wrong contact us');</script>";
+        exit;
+    }
 }
 else {
-
     header('Location:failuer.php');
-
     }
-
-
 }else{
-    echo"retry again ...";
+    echo"Retry again....";
 }
-
-
 ?>

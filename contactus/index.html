@@ -18,54 +18,53 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>  
     <style>
-      body {font-family: Arial, Helvetica, sans-serif;color: white;}
-      * {box-sizing: border-box;}
-
       
-      input[type=text], select, textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccccccdc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-        color: black;
-        background-color: rgba(255, 255, 255, 0.849);
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
       }
-      
-      input[type=mail]{
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccccccdc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-        color: black;
-        background-color: rgba(255, 255, 255, 0.849);
-      }
-      input[type=submit] {
-        background-color: #04AA6D;
-        color: black;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      
-      input[type=submit]:hover {
-        background-color: #45a049;
-      }
-      
       .container1 {
-        border-radius: 5px;
-        background-color: black;
-        padding: 20px;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
       }
-      </style>
+      h2 {
+          text-align: center;
+      }
+      form {
+          background-color: black;
+          padding: 20px;
+          border-radius: 8px;
+          border: 2px solid wheat;
+      }
+      label {
+          font-weight: bold;
+          color: white;
+      }
+      input[type="text"], input[type="email"], input[type="tel"], textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-sizing: border-box;
+          color: black;
+          background-color: white;
+      }
+      input[type="submit"] {
+          background-color: gold;
+          color: black;
+          padding: 15px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          width: 100%;
+      }
+      input[type="submit"]:hover {
+          background-color: #45a049;
+      }
+  </style>
 </head>
 <body>
   <nav class="navbar">
@@ -85,12 +84,12 @@
             <a>Bulk Booking</a> 
           </ul>
           <div class="dropdown-content">
-          <a href="https://escapemgm.com/events/">Birthday?</a>
-          <a href="https://escapemgm.com/events/">Parties?</a>
-          <!-- <a href="https://www.youtube.com/user/hubspot">YouTube</a> -->
+          <a href="https://escapemgm.com/events/birthday/">Birthday?</a>
+          <a href="https://escapemgm.com/events/party/">Parties?</a>a
+          <a href="https://escapemgm.com/event/corporate/">Corporate Booking</a>        
           </div>
         </div></li>
-        <li><a href="https://escapemgm.com/whats-coming-next/">What's coming</a></li>
+        <li><a href="https://escapemgm.com/price_chart/">Price List</a></li>
         <li><a href="https://escapemgm.com/contactus/">Contact</a></li>
       </ul>
       <a href="https://escapemgm.com/">
@@ -98,26 +97,26 @@
       </a>
     </div>
   </nav>
-<hr>
-  <br><br><br>
-    <center>
-        <h1> CONTACT US </h1>
-    </center>
-    <div class="container1">
-      <form action="./contact.php" method="post">
-        <label for="fname">Full Name :</label>
-        <input type="text" id="fname" required name="name" placeholder="Your name..">
-    
-        <label for="lname">E-Mail:</label>
-        <input type="mail" id="lname" name="mail" placeholder="Enter your email" required>
-    
-    
-        <label for="subject">Subject :</label>
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" required></textarea>
-    
-        <input type="submit" value="Submit">
-      </form>
-    </div>
+<hr><br><br>
+<div class="container1">
+  <h2 class="section-title" style="color: white;">Contact Us</h2> <br><br><br>
+
+  <form action="contact.php" method="post">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <label for="subject">Subject</label>
+      <textarea id="subject" name="subject" required></textarea>
+
+      <input type="submit" name="submit" value="Submit">
+  </form>
+</div>
 <hr><br>
 <footer class="footer">
     <div class="footer-top">
@@ -205,8 +204,8 @@
             <a href="https://escapemgm.com/t&c/" class="footer-link">Terms & Conditions</a>
           </li>
 
-          <li>
-            <a href="https://escapemgm.com/sr/" class="footer-link">Shipping, Returns & Refunds</a>
+          <!-- <li>
+            <!-- <a href="https://escapemgm.com/sr/" class="footer-link">Shipping, Returns & Refunds</a> -->
           </li>
 
           <li>

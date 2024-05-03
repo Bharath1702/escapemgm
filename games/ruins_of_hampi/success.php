@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['date']) && isset($_SESSION['timeslot']) && isset($_SESSION['mobile']) && isset($_SESSION['qty']) && isset($_SESSION['amount']) && isset($_SESSION['transactionId']) && isset($_SESSION['tran_id'])) {
     // Retrieve session variables
@@ -56,7 +55,6 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
     margin: 0 auto;
   }
 </style>
-
 <body>
   <div class="card">
     <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
@@ -77,15 +75,6 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
   </div>
 </body>
 <?php
-    include "./utils/db.php";
-    $stmt = mysqli_prepare($conn, "INSERT INTO ruins_of_hampi (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
-    $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tran_id );
-    if ($stmt->execute()) {
-        echo "<h1> Booking Successfull </h1>";
-    } else {
-        echo "<h1> Booking Failed </h1>";
-        exit;
-    }
 session_unset();
 session_destroy();
 ?>

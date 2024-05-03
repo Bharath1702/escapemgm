@@ -29,9 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_event'])) {
     $date = sanitize_input($_POST['date']);
     $mobile = sanitize_input($_POST['mobile']);
     $event = sanitize_input($_POST['event']);
+    $details = sanitize_input($_POST['details']);
     $qty = sanitize_input($_POST['qty']);
 
-    $sql = "INSERT INTO events (name, email, date, mobile, event, qty) VALUES ('$name', '$email', '$date', '$mobile', '$event', '$qty')";
+    $sql = "INSERT INTO events (name, email, date, mobile, event,details, qty) VALUES ('$name', '$email', '$date', '$mobile', '$event','$details', '$qty')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New event added successfully";
@@ -61,9 +62,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_event'])) {
     $date = sanitize_input($_POST['date']);
     $mobile = sanitize_input($_POST['mobile']);
     $event = sanitize_input($_POST['event']);
+    $details = sanitize_input($_POST['details']);
     $qty = sanitize_input($_POST['qty']);
 
-    $sql = "UPDATE events SET name='$name', email='$email', date='$date', mobile='$mobile', event='$event', qty='$qty' WHERE id='$id'";
+    $sql = "UPDATE events SET name='$name', email='$email', date='$date', mobile='$mobile', event='$event',details='$details' qty='$qty' WHERE id='$id'";
 
     if ($conn->query($sql) === TRUE) {
         echo "Event updated successfully";
@@ -94,6 +96,7 @@ $result = $conn->query($sql);
         Date: <input type="date" name="date" required><br>
         Mobile: <input type="text" name="mobile" required><br>
         Event: <input type="text" name="event" required><br>
+        Details: <input type="text" name="details" required><br>
         Quantity: <input type="number" name="qty" required><br>
         <input type="submit" name="add_event" value="Add Event">
     </form>
@@ -108,6 +111,7 @@ $result = $conn->query($sql);
             <th>Date</th>
             <th>Mobile</th>
             <th>Event</th>
+            <th>Details</th>
             <th>Quantity</th>
             <th>Action</th>
         </tr>
@@ -121,6 +125,7 @@ $result = $conn->query($sql);
                 echo "<td>" . $row["date"] . "</td>";
                 echo "<td>" . $row["mobile"] . "</td>";
                 echo "<td>" . $row["event"] . "</td>";
+                echo "<td>" . $row["details"] . "</td>";
                 echo "<td>" . $row["qty"] . "</td>";
                 echo "<td>
                         <form action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "' method='post'>

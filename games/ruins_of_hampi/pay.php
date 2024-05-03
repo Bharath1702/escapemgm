@@ -2,7 +2,7 @@
 require './utils/config.php';
 require './utils/common.php';
 
-if(API_STATUS == "LIVE"){
+if(API_STATUS == 'LIVE'){
     $merchantid  = MERCHANTIDLIVE;
     $saltkey = SALTKEYLIVE;
     $saltindex = SALTINDEX;
@@ -63,7 +63,7 @@ $jsonencode = json_encode($payLoad);
 
     $payloaddata = $payloadbase64 . "/pg/v1/pay" . $saltkey;
 
-    // echo "<p> payloadbase64:  ". $payloadbase64 ."</p>";
+    //  echo "<p> payloadbase64:  ". $payloadbase64 ."</p>";
 
     $sha256 = hash("sha256", $payloaddata);
 
