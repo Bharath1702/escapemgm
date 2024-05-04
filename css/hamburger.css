@@ -14,9 +14,10 @@
     border:none;
   }
   .dropdown-content {
+    background-color: black;
     display: none;
     position: absolute;
-    width: 100%;
+    width: 150%;
     overflow: auto;
     box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
     border: 1px solid gold;
@@ -52,10 +53,10 @@
     .dropdown-content {
       display: none;
       position: absolute;
-      left: 130%;
-      width: 100%;
+      left: 80%;
+      width: 160%;
       overflow: auto;
-      box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+      box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.87);
       border: 2px solid gold;
       border-radius: 10px;
     }

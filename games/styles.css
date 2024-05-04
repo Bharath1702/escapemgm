@@ -76,6 +76,9 @@ body {
     .button1{
         margin-top: -10%;
     }
+    #booknow{
+      width: 60%;
+    }
   }
   .testbox {
       display: flex;

@@ -536,7 +536,6 @@ body {
   display: flex;
   cursor: pointer;
   font-size: 2.2rem;
-  background: #000;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -544,7 +543,7 @@ body {
 }
 
 .slider-wrapper .slide-button:hover {
-  background: #404040;
+  background: gold;
 }
 
 .slider-wrapper .slide-button#prev-slide {
