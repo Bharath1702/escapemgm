@@ -1,22 +1,28 @@
 <?php
 require_once "./utils/config.php";
 require_once "./utils/common.php";
-require_once "./utils/SendMail.php";
-include "./utils/db.php";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+ 
+require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
+require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
+require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
+
 session_start();
 if(isset($_POST['merchantId']) && isset($_POST['transactionId']) && isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['date']) && isset($_SESSION['timeslot']) && isset($_SESSION['mobile']) && isset($_SESSION['qty']) && isset($_SESSION['amount']))
     {
-        $name     = $_SESSION['name'];
-        $email    = $_SESSION['email'];
-        $date     = $_SESSION['date'];
-        $timeslot = $_SESSION['timeslot'];
-        $mobile   = $_SESSION['mobile'];
-        $qty      = $_SESSION['qty'];
-        $amount   = $_SESSION['amount'];
-        $merchantId      = $_POST['merchantId'];
-        $transactionId      = $_POST['transactionId'];
-        $_SESSION['merchantId'] = $merchantId;
-        $_SESSION['transactionId'] = $transactionId;
+        $name                       = $_SESSION['name'];
+        $email                      = $_SESSION['email'];
+        $date                       = $_SESSION['date'];
+        $timeslot                   = $_SESSION['timeslot'];
+        $mobile                     = $_SESSION['mobile'];
+        $qty                        = $_SESSION['qty'];
+        $amount                     = $_SESSION['amount'];
+        $merchantId                 = $_POST['merchantId'];
+        $transactionId              = $_POST['transactionId'];
+        $_SESSION['merchantId']     = $merchantId;
+        $_SESSION['transactionId']  = $transactionId;
         // echo"everything properly set";
 
 if (API_STATUS == "LIVE") {
@@ -74,40 +80,44 @@ $_SESSION['tran_id']=$tran_id;
 
     if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS")
     {
-        //Send Email and redirect to success page
-    //     $now = new DateTime();
-    //     $timestring = $now->format('d-M-Y h:i:s');
-    //     $msg = 'Dear ' . $name . ",<br/>";
-    //     $msg .= '<br/>We have received your payment and Below is your payment Details<br/> ';
-    //     $msg .= '<table>';
-    //     $msg .= '<tr><td>Name:</td><td>' . $name . '</td></tr>';
-    //     $msg .= '<tr><td>Email:</td><td>' . $email . '</td></tr>';
-    //     $msg .= '<tr><td>Mobile:</td><td>' . $mobile . '</td></tr>';
-    //     $msg .= '<tr><td>Amount:</td><td>Rs.' . $amount/100 . '</td></tr>';
-    //     $msg .= '<tr><td>Transaction id:</td><td>' . $tran_id . '</td></tr>';
-    //     $msg .= '<tr><td>Date:</td><td>' . $timestring . '</td></tr>';
-    //     $msg .= '</table><br/>';
-    //     $msg .= '<p>From,</p>';
-    //     $msg .= '<p>Techmalasi Team</p>';
-    //     $ob = new Mail();
-    //    $r =  $ob->sendMail($email, $msg);
-    //    echo "response>>".$r;
-        // sleep(3);
-        // if($r)
-        // header('Location:success.php');
-    include "./utils/db.php";
-        // else
-        // header('Location:success.php');
+    
+        $mail = new PHPMailer(true);
+    
+    try {
+        //Server settings
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host       = 'smtp-relay.brevo.com';          // Specify main and backup SMTP servers
+        $mail->SMTPAuth   = true;                             // Enable SMTP authentication
+        $mail->Username   = 'bharathac7@gmail.com';           // SMTP username
+        $mail->Password   = 'SDCtQNnda4FVW6rq';               // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
+        $mail->Port       = 587;                              // TCP port to connect to
+ 
+        //Recipients
+    $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
+    $mail->addAddress($email, $name);     // Add a recipient
+    $mail->addAddress('escapemgm@escapemgm.com');               // Name is optional
+    $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
+    $mail->addCC('cc@example.com');
+    $mail->addBCC('bcc@example.com');
+ 
+        // Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Booking Successfull for The Nuclear Bunker';
+        $mail->Body    = "Name: $name<br>Email: $email<br>Phone: $phone<br>Date : $date <br>Timeslot : $timeslot <br>No. of Players: $qty<br>Advance Paid: $amount <br>TransactionId : $transactionId";
+        // Send email
+        $mail->send();
+
     include "./utils/db.php";
     $stmt = mysqli_prepare($conn, "INSERT INTO the_nuclear_bunker (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
     $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tran_id );
     if ($stmt->execute()) {
-        echo "<h1> Booking Successfull </h1>";
+        echo "<script>alert('booking Successful');</script>";
+        header('Location:success.php');
     } else {
-        echo "<h1> Booking Failed </h1>";
+        echo "<script>alert('oops something went wrong contact us');</script>";
         exit;
     }
-        header('Location:success.php');
 }
 else {
     header('Location:failuer.php');

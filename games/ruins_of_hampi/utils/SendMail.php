@@ -1,7 +1,9 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require './vendor/autoload.php';
+require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
+require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
+require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
 
 class Mail
 {
@@ -12,13 +14,13 @@ function sendMail($to='',$msg='')
 	$mail = new PHPMailer(true);
 	$mail->SMTPDebug = 2;
 	$mail->isSMTP();
-	$mail->Host	 = 'smtp.hostinger.com';
+	$mail->Host	 = 'smtp-relay.brevo.com';
 	$mail->SMTPAuth = true;
-	$mail->Username = 'escapemgm@escapemgm.com';
-	$mail->Password = 'Escape@2024';
-	$mail->SMTPSecure = 'ssl';
-	$mail->Port	 = 465;
-	$mail->setFrom('', 'Techmalasi');
+	$mail->Username = 'bharathac7@gmail.com';
+	$mail->Password = 'SDCtQNnda4FVW6rq';
+	$mail->SMTPSecure = 'tls';
+	$mail->Port	 = 587;
+	$mail->setFrom('ESCAPEROOM', 'escapemgm@escapemgm.com');
 	$mail->addAddress($to);
 	$mail->isHTML(true);
 	$mail->Subject = 'Payment Successfully Completed';
