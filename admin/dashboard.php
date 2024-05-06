@@ -1,7 +1,20 @@
 <?php
 session_start();
-if($_SESSION['loggedin']=true){
-    echo'<!DOCTYPE html>
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: index.html");
+    exit;
+}
+
+// Logout functionality
+if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
+    session_unset(); // Unset all session variables
+    session_destroy(); // Destroy the session
+    header("Location: index.html"); // Redirect to login page
+    exit;
+
+}
+?>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -97,14 +110,13 @@ if($_SESSION['loggedin']=true){
                 <a href="events.php">
                     <div class="col"><h3>Bulk Bookings</h3></div>
                 </a>
+                <a href="./block_bookings/index.php">
+                <div class="col"><h3>manage timeslots</h3></div>
+                </a>
             </div>
           </div>
     
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     </body>
-    </html>';
-}else{
-    echo"<script>alert('You cant fool me');window.location.href = './index.html';</script>";
-}
-?>
+    </html>

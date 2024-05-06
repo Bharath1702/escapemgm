@@ -1,8 +1,16 @@
 <?php
-if($_SESSION['loggedin']==true){
-    echo"<script>alert('Login Success');</script>";
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: index.html");
+    exit;
 }
-else{
-    echo"<script>alert('You cant fool me');window.location.href = './index.html';</script>";
+
+// Logout functionality
+if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
+    session_unset(); // Unset all session variables
+    session_destroy(); // Destroy the session
+    header("Location: index.html"); // Redirect to login page
+    exit;
+
 }
 ?>

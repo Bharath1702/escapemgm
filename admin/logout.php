@@ -1,5 +1,14 @@
 <?php
-    session_unset();
-    session_destroy();
-    echo "<script>window.location.href = 'index.html';</script>";
+// Start session
+session_start();
+
+// Unset all session variables
+$_SESSION = [];
+
+// Destroy the session
+session_destroy();
+
+// Redirect to login page
+header("Location: index.html");
+exit;
 ?>
