@@ -49,21 +49,23 @@ if($_SESSION['loggedin']=true){
     <form align="right" action="logout.php"><button type="submit" placeholder="logout" style="height:50px;width:10%;">LOGOUT</button></form>
         <div class="container text-center" id="cont1">
             <div class="row row-cols-4">
+                 <a href="./allbookings.php">
+                    <div class="col"><h3>View All Bookings</h3></div>
+                </a>
+                
                 <a href="./ruins_of_hampi.php">
                     <div class="col"><h3>Ruins of Hampi</h3></div>
                 </a>
+                
                 <a href="./deadly_chamber.php">
     
                     <div class="col"><h3>Deadly Chamber</h3></div>
                 </a>
+                
                 <a href="./killbill.php">
                     <div class="col"><h3>Killbill</h3></div>
-    
                 </a>
-                <a href="./ransom.php">
-    
-                    <div class="col"><h3>Ransom</h3></div>
-                </a>
+                
             </div>
           </div>
           <div class="container text-center" id="cont1">
@@ -71,22 +73,29 @@ if($_SESSION['loggedin']=true){
                 <a href="./nuclear_bunker.php">
                     <div class="col"><h3>the Nuclear Bunker</h3></div>
                 </a>
+                
+                <a href="./ransom.php">
+                    <div class="col"><h3>Ransom</h3></div>
+                </a>
+                
                 <a href="timeslots.php">
                     <div class="col"><h3>Edit Timeslots</h3></div>
                 </a>
+                
                 <a href="./contact.php">
                     <div class="col"><h3>Wants to Contact</h3></div>
-    
                 </a>
-                <a href="events.php">
-                    <div class="col"><h3>Bulk Bookings</h3></div>
-                </a>
+                
             </div>
           </div>
           <div class="container text-center" id="cont1">
             <div class="row row-cols-4">
                 <a href="https://escapemgm.com:2083/cpsess8487825038/3rdparty/phpMyAdmin/index.php?route=/database/structure&db=escapemgm_gateways">
                     <div class="col"><h3>MYSQL</h3></div>
+                </a>
+                
+                <a href="events.php">
+                    <div class="col"><h3>Bulk Bookings</h3></div>
                 </a>
             </div>
           </div>
