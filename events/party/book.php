@@ -47,7 +47,7 @@ if(isset($_POST['name'])){
  
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Bulk Booking Successfull for Party';
+        $mail->Subject = 'Bulk Booking Successfull for Party We will confirm shortly';
         $mail->Body    = "Name: $name<br>Email: $email<br>Phone: $phone<br>Date : $date  <br>No. of Players: $qty <br>Event Details : $details";
         // Send email 
         $mail->send();

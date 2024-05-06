@@ -78,13 +78,12 @@ $amount = $responsePayment['data']['amount'];
 $_SESSION['tran_id']=$tran_id;
 
 
-    if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS")
-    {
-    
-        $mail = new PHPMailer(true);
-    
+if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS") {
+    // Send email
+    $mail = new PHPMailer(true);
+
     try {
-        //Server settings
+        // Server settings
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host       = 'smtp-relay.brevo.com';          // Specify main and backup SMTP servers
         $mail->SMTPAuth   = true;                             // Enable SMTP authentication
@@ -92,36 +91,43 @@ $_SESSION['tran_id']=$tran_id;
         $mail->Password   = 'SDCtQNnda4FVW6rq';               // SMTP password
         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
         $mail->Port       = 587;                              // TCP port to connect to
- 
-        //Recipients
-    $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
-    $mail->addAddress($email, $name);     // Add a recipient
-    $mail->addAddress('escapemgm@escapemgm.com');               // Name is optional
-    $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
-    $mail->addCC('cc@example.com');
-    $mail->addBCC('bcc@example.com');
- 
+
+        // Recipients
+        $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
+        $mail->addAddress($email, $name);     // Add a recipient
+        $mail->addAddress('escapemgm@escapemgm.com');               // Name is optional
+        $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
+        $mail->addCC('cc@example.com');
+        $mail->addBCC('bcc@example.com');
+
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Booking Successfull for Ransom';
+        $mail->Subject = 'Booking Successful for Deadly Chamber';
         $mail->Body    = "Name: $name<br>Email: $email<br>Phone: $phone<br>Date : $date <br>Timeslot : $timeslot <br>No. of Players: $qty<br>Advance Paid: $amount <br>TransactionId : $transactionId";
+        
         // Send email
         $mail->send();
 
-    include "./utils/db.php";
-    $stmt = mysqli_prepare($conn, "INSERT INTO ransom (name,email,mobile, date, no_of_players, timeslot_id,txnID) VALUES (?, ?, ?, ?,?,?,?)");
-    $stmt->bind_param("sssssss", $name,$email,$mobile, $date, $qty, $timeslot,$tran_id );
-    if ($stmt->execute()) {
-        echo "<script>alert('booking Successful');</script>";
-        header('Location:success.php');
-    } else {
-        echo "<script>alert('oops something went wrong contact us');</script>";
-        exit;
+        // Insert into database
+        include "./utils/db.php";
+        $stmt = mysqli_prepare($conn, "INSERT INTO deadly_chamber (name, email, mobile, date, no_of_players, timeslot_id, txnID) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $name, $email, $mobile, $date, $qty, $timeslot, $tran_id);
+        if ($stmt->execute()) {
+            echo "<script>alert('Booking Successful');</script>";
+            header('Location: success.php');
+            exit; // Exit after redirection
+        } else {
+            echo "<script>alert('Oops, something went wrong. Please contact us.');</script>";
+            exit; // Exit after error message
+        }
+    } catch (Exception $e) {
+        echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}');</script>";
+        exit; // Exit after error message
     }
-}
-else {
-    header('Location:failuer.php');
-    }
+} else {
+    // Payment failure, redirect to failure page
+    header('Location: failure.php');
+    exit; // Exit after redirection
 }else{
     echo"Retry again....";
 }
