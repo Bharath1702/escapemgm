@@ -40,6 +40,7 @@ if(isset($_POST['name'])){
         //Recipients
     $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
     $mail->addAddress($email, $name);     // Add a recipient
+    $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');
     $mail->addAddress('escapemgm@escapemgm.com');               // Name is optional
     $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
     $mail->addCC('cc@example.com');
