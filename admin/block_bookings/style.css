@@ -19,7 +19,7 @@
     box-sizing: border-box;
   }
   
-  input[type="submit"] {
+  button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -29,12 +29,7 @@
     cursor: pointer;
   }
   
-  input[type="submit"]:hover {
+  button:hover {
     background-color: #45a049;
-  }
-  
-  /* Styles for the span next to the checkbox */
-  span {
-    margin-left: 5px;
   }
   
