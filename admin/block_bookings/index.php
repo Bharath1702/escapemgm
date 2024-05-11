@@ -27,7 +27,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
             background-color: #f2f2f2;
             margin: 0;
             padding: 0;
-            display: flex;
+            display: block;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -38,6 +38,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 60%;
         }
 
         label {
@@ -73,9 +74,46 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     </style>
 </head>
 <body>
+    <center>
+    <form action="indblock.php" method="POST">
+    <center><h1>Block Individual</h1></center>
+    <label for="fromdate">From Date:</label>
+    <input type="date" name="fromdate" id="date">
+    <label for="todate">To Date:</label>
+    <input type="date" name="todate" id="date">
+    <label for="game">Game:</label>
+    <select name="game" id="game">
+        <option value="deadly_chamber">Deadly Chamber</option>
+        <option value="the_nuclear_bunker">The Nuclear Bunker</option>
+        <option value="ruins_of_hampi">Ruins of Hampi</option>
+        <option value="ransom">Ransom</option>
+        <option value="killbill">Killbill</option>
+    </select>
+    <input type="submit" name="submit" id="submit" value="Block">
+</form>
+<form action="indunblock.php" method="POST">
+    <center><h1>Unblock Individual</h1></center>
+    <label for="fromdate">From Date:</label>
+    <input type="date" name="fromdate" id="date">
+    <label for="todate">To Date:</label>
+    <input type="date" name="todate" id="date">
+    <label for="game">Game:</label>
+    <select name="game" id="game">
+        <option value="deadly_chamber">Deadly Chamber</option>
+        <option value="the_nuclear_bunker">The Nuclear Bunker</option>
+        <option value="ruins_of_hampi">Ruins of Hampi</option>
+        <option value="ransom">Ransom</option>
+        <option value="killbill">Killbill</option>
+    </select>
+    <input type="submit" name="submit" id="submit" value="Block">
+</form>
+ <br><br><br>   
+
+
+<div>
 <form action="block.php" method="POST">
 <center>
-    <h1>Block Bookings</h1>
+    <h1>Block All Game Bookings</h1>
 </center>
     <label for="fromdate">From Date:</label>
     <input type="date" name="fromdate" id="date">
@@ -86,7 +124,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
 </form>
 <form action="unblock.php" method="POST">
 <center>
-    <h1>Unblock Bookings</h1>
+    <h1>Unblock All Game Bookings</h1>
 </center>
     <label for="fromdate">From Date:</label>
     <input type="date" name="fromdate" id="date">
@@ -94,5 +132,9 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     <input type="date" name="todate" id="date">
     <input type="submit" name="submit" id="submit" value="Unblock">
 </form>
+</div>
+    </center>
+
+
 </body>
 </html>
