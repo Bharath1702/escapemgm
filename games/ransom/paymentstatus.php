@@ -87,8 +87,8 @@ if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS"
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host       = 'smtp-relay.brevo.com';          // Specify main and backup SMTP servers
         $mail->SMTPAuth   = true;                             // Enable SMTP authentication
-        $mail->Username   = 'bharathac7@gmail.com';           // SMTP username
-        $mail->Password   = 'SDCtQNnda4FVW6rq';               // SMTP password
+        $mail->Username   = '74a2b5001@smtp-brevo.com';           // SMTP username
+        $mail->Password   = 'q8hKY1P7dkzw4aIQ';                // SMTP password
         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
         $mail->Port       = 587;                              // TCP port to connect to
 
