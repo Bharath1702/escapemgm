@@ -1,8 +1,8 @@
 <?php
-// $servername = "localhost";
-// $username = "root";       
-// $password = "";           
-// $database = "bookings";    
+//$servername = "localhost";
+//$username = "root";       
+//$password = "";           
+//$database = "bookings";    
 
 
 $servername = "localhost";

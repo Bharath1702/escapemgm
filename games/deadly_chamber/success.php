@@ -75,7 +75,10 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
   </div>
 </body>
 <?php
-session_unset();
+session_start();
+$_SESSION = [];
+
+// Destroy the session
 session_destroy();
 ?>
 

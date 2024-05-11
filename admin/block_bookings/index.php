@@ -73,20 +73,26 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     </style>
 </head>
 <body>
-
 <form action="block.php" method="POST">
-    <label for="date">Date:</label>
-    <input type="date" name="date" id="date">
-    <label for="game">Game:</label>
-    <select name="game" id="game">
-        <option value="deadly_chamber">Deadly Chamber</option>
-        <option value="the_nuclear_bunker">The Nuclear Bunker</option>
-        <option value="ruins_of_hampi">Ruins of Hampi</option>
-        <option value="ransom">Ransom</option>
-        <option value="killbill">Killbill</option>
-    </select>
+<center>
+    <h1>Block Bookings</h1>
+</center>
+    <label for="fromdate">From Date:</label>
+    <input type="date" name="fromdate" id="date">
+    <label for="todate">To Date:</label>
+    <input type="date" name="todate" id="date">
+    
     <input type="submit" name="submit" id="submit" value="Block">
 </form>
-
+<form action="unblock.php" method="POST">
+<center>
+    <h1>Unblock Bookings</h1>
+</center>
+    <label for="fromdate">From Date:</label>
+    <input type="date" name="fromdate" id="date">
+    <label for="todate">To Date:</label>
+    <input type="date" name="todate" id="date">
+    <input type="submit" name="submit" id="submit" value="Unblock">
+</form>
 </body>
 </html>
