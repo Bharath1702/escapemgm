@@ -98,16 +98,14 @@ $jsonencode = json_encode($payLoad);
 
     $err = curl_error($curl);
     curl_close($curl);
-    echo $response;
+    //echo $response;
     if ($err) {
         echo "cURL Error #:" . $err;
     } else {
         $res = json_decode($response);
         // echo "<br/>response===";
         // print_r($res);
-
         if (isset($res->success) && $res->success == '1') {
-
             $payUrl = $res->data->instrumentResponse->redirectInfo->url;
             header('Location:' . $payUrl);
         }

@@ -79,6 +79,17 @@ $_SESSION['tran_id']=$tran_id;
 
 
 if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS") {
+    include "./utils/db.php";
+        $stmt = mysqli_prepare($conn, "INSERT INTO deadly_chamber (name, email, mobile, date, no_of_players, timeslot_id, txnID) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $name, $email, $mobile, $date, $qty, $timeslot, $tran_id);
+        if ($stmt->execute()) {
+            echo "<script>alert('Booking Successful');</script>";
+            header('Location: success.php');
+            exit; // Exit after redirection
+        } else {
+            echo "<script>alert('Oops, something went wrong. Please contact us.');</script>";
+            exit; // Exit after error message
+        }
     // Send email
     $mail = new PHPMailer(true);
 
@@ -102,24 +113,14 @@ if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS"
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Booking Successful for Deadly Chamber';
+        $mail->Subject = 'Booking Successful for Ruins Of Hampi';
         $mail->Body    = "Name: $name<br>Email: $email<br>Phone: $phone<br>Date : $date <br>Timeslot : $timeslot <br>No. of Players: $qty<br>Advance Paid: $amount <br>TransactionId : $transactionId";
         
         // Send email
         $mail->send();
 
         // Insert into database
-        include "./utils/db.php";
-        $stmt = mysqli_prepare($conn, "INSERT INTO deadly_chamber (name, email, mobile, date, no_of_players, timeslot_id, txnID) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $name, $email, $mobile, $date, $qty, $timeslot, $tran_id);
-        if ($stmt->execute()) {
-            echo "<script>alert('Booking Successful');</script>";
-            header('Location: success.php');
-            exit; // Exit after redirection
-        } else {
-            echo "<script>alert('Oops, something went wrong. Please contact us.');</script>";
-            exit; // Exit after error message
-        }
+        
     } catch (Exception $e) {
         echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}');</script>";
         exit; // Exit after error message
