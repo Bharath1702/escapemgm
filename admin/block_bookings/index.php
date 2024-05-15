@@ -105,7 +105,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
         <option value="ransom">Ransom</option>
         <option value="killbill">Killbill</option>
     </select>
-    <input type="submit" name="submit" id="submit" value="Block">
+    <input type="submit" name="submit" id="submit" value="Unblock">
 </form>
  <br><br><br>   
 
@@ -119,9 +119,10 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     <input type="date" name="fromdate" id="date">
     <label for="todate">To Date:</label>
     <input type="date" name="todate" id="date">
-    
     <input type="submit" name="submit" id="submit" value="Block">
 </form>
+
+
 <form action="unblock.php" method="POST">
 <center>
     <h1>Unblock All Game Bookings</h1>
