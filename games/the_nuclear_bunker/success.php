@@ -12,6 +12,39 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
     $transactionId = $_SESSION['transactionId'];
     $tran_id = $_SESSION['tran_id'];
 }
+ $mail = new PHPMailer(true);
+
+         try {
+             //Server settings
+             $mail->isSMTP();                                      // Set mailer to use SMTP
+         $mail->Host       = 'smtp-relay.brevo.com';          // Specify main and backup SMTP servers
+         $mail->SMTPAuth   = true;                             // Enable SMTP authentication
+         $mail->Username   = '74bba4001@smtp-brevo.com';           // SMTP username
+         $mail->Password   = 'Z1HATDU6V0gSBq78';                // SMTP password
+         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
+         $mail->Port       = 587;                              // TCP port to connect to
+
+             //Recipients
+             $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
+             $mail->addAddress($email, $name);
+             $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');     // Add a recipient
+             $mail->addAddress('escapemgm@escapemgm.com');               // Name is optional
+             $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
+             $mail->addCC('cc@example.com');
+             $mail->addBCC('bcc@example.com');
+
+             // Content
+             $mail->isHTML(true);                                  // Set email format to HTML
+             $mail->Subject = 'Bulk Booking Successful for The Nuclear Bunker';
+             $mail->Body = "Name: $name<br>Email: $email<br>Phone: $mobile<br>Date: $date<br>Timeslot: $timeslot<br>No. of Players: $qty<br>Advance Paid: $amount<br>TransactionId: $transactionId";
+             // Send email 
+             $mail->send();
+            
+            //  echo "<script>alert('sent successfully');window.location.href = 'success.php';</script>";
+            
+         } catch (Exception $e) {
+             echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}')</script>";
+         }
 ?>
 <html>
 <head>
@@ -21,11 +54,11 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
   body {
     text-align: center;
     padding: 40px 0;
-    background: #EBF0F5;
+    background: black;
   }
 
   h1 {
-    color: red;
+    color: gold;
     font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
     font-weight: 900;
     font-size: 40px;
@@ -33,7 +66,7 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
   }
 
   p {
-    color: #404F5E;
+    color: white;
     font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
     font-size: 20px;
     margin: 0;
@@ -47,7 +80,7 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
   }
 
   .card {
-    background: white;
+    background: black;
     padding: 60px;
     border-radius: 4px;
     box-shadow: 0 2px 3px #C8D0D8;
@@ -57,7 +90,7 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
 </style>
 <body>
   <div class="card">
-    <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+    <div style="border-radius:200px; height:200px; width:200px; background:gold; margin:0 auto;">
       <i class="checkmark">✓</i>
     </div>
 

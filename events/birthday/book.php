@@ -61,7 +61,6 @@ if (isset($_POST['name'])) {
         }
 
         // Close the statement
-        $stmt->close();
     } else {
         echo "<script>alert('Error occurred while inserting data into database')</script>";
     }

@@ -1,10 +1,10 @@
 <?php
 define("BASE_URL", "https://escapemgm.com/games/deadly_chamber/");
-define("API_STATUS", "LIVE"); //LIVE OR UAT
+define("API_STATUS", "UAT"); //LIVE OR UAT
 define("MERCHANTIDLIVE", "M22LJ64K27TRM");
-define("MERCHANTIDUAT", "PGTESTPAYUAT");  //Sandbox testing 
+define("MERCHANTIDUAT", "TAPANAUAT");  //Sandbox testing 
 define("SALTKEYLIVE", "bb0e4def-61cc-47cf-aef9-03b4cba84a85");
-define("SALTKEYUAT", "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399");//
+define("SALTKEYUAT", "ccf6be56-38d6-4824-8f2b-0f1a1182608d");//
 define("SALTINDEX", "1");
 define("REDIRECTURL", "paymentstatus.php");
 define("SUCCESSURL", "success.php");
