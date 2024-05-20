@@ -17,6 +17,21 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
     $amount   = $_SESSION['amount'];
     $transactionId = $_SESSION['transactionId'];
     $tran_id = $_SESSION['tran_id'];
+    include "./utils/db.php";
+    if ($stmt = $conn->prepare("SELECT time FROM timeslots WHERE id = ?")) {
+      $stmt->bind_param("i", $timeslot); // "i" indicates the type is integer
+      $stmt->execute();
+      
+      // Bind result variables
+      $stmt->bind_result($time); 
+      // Close statement
+      $stmt->close();
+  } else {
+      echo "Error preparing statement: " . $conn->error;
+  }
+  
+  // Close connection
+  $conn->close();
 }
  $mail = new PHPMailer(true);
 
@@ -42,7 +57,7 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
              // Content
              $mail->isHTML(true);                                  // Set email format to HTML
              $mail->Subject = 'Booking Successful for Deadly Chamber';
-             $mail->Body = "Name: $name<br>Email: $email<br>Phone: $mobile<br>Date: $date<br>Timeslot: $timeslot<br>No. of Players: $qty<br>Advance Paid: $amount<br>TransactionId: $tran_id";
+             $mail->Body = "Name: $name<br>Email: $email<br>Phone: $mobile<br>Date: $date<br>Timeslot: $time<br>No. of Players: $qty<br>Advance Paid: $amount<br>TransactionId: $tran_id";
              // Send email 
              $mail->send();            
          } catch (Exception $e) {
@@ -101,12 +116,12 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
     <p>Name: <?php echo $name; ?></p>
     <p>Email: <?php echo $email; ?></p>
     <p>Date: <?php echo $date; ?></p>
-    <p>Timeslot: <?php echo $timeslot; ?></p>
+    <p>Timeslot: <?php echo $time; ?></p>
     <p>No of Players: <?php echo $qty; ?></p>
     <p>Amount paid : <?php echo $amount; ?></p>
     <p>Transaction ID: <?php echo $tran_id ?></p>
     <p>We received your purchase request;<br /> we'll be in touch shortly!</p>
-
+    <p>check your spam mail folder if you dont receive any mails yet</p><br><a href="../../" style="font-size:30px">go back</a>
   </div>
 </body>
 <?php
