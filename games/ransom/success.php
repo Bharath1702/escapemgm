@@ -17,21 +17,32 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
     $amount   = $_SESSION['amount'];
     $transactionId = $_SESSION['transactionId'];
     $tran_id = $_SESSION['tran_id'];
-    include "./utils/db.php";
-    if ($stmt = $conn->prepare("SELECT time FROM timeslots WHERE id = ?")) {
-      $stmt->bind_param("i", $timeslot); // "i" indicates the type is integer
-      $stmt->execute();
-      
-      // Bind result variables
-      $stmt->bind_result($time); 
-      // Close statement
-      $stmt->close();
-  } else {
-      echo "Error preparing statement: " . $conn->error;
-  }
-  
-  // Close connection
-  $conn->close();
+    include './utils/db.php';
+
+// Assuming you have a database connection in db.php like:
+// $conn = new mysqli($servername, $username, $password, $dbname);
+
+// Prepare and bind
+if ($stmt = $conn->prepare("SELECT time FROM timeslots WHERE id = ?")) {
+    $stmt->bind_param("i", $timeslot); // "i" indicates the type is integer
+    $stmt->execute();
+    
+    // Bind result variables
+    $stmt->bind_result($time);
+    
+    // Fetch value
+    while ($stmt->fetch()) {
+        echo $time;
+    }
+
+    // Close statement
+    $stmt->close();
+} else {
+    echo "Error preparing statement: " . $conn->error;
+}
+
+// Close connection
+$conn->close();
 }
  $mail = new PHPMailer(true);
 

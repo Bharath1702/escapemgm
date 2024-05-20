@@ -95,7 +95,6 @@ $jsonencode = json_encode($payLoad);
 
     
     $response = curl_exec($curl);
-    echo $response;
     $err = curl_error($curl);
     curl_close($curl);
     //echo $response;
