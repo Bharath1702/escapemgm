@@ -11,8 +11,8 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     session_destroy(); // Destroy the session
     header("Location: index.html"); // Redirect to login page
     exit;
-
 }
+
 // Database connection
 include 'db.php';
 if ($conn->connect_error) {
@@ -49,16 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Retrieve data for next 2 days
+// Retrieve data for the next 14 days
 $today = date("Y-m-d");
-$twoDaysLater = date("Y-m-d", strtotime("+14 days"));
-$game = 'deadly_chamber'
-// You were overwriting $sql variable, let's use different variables for each query
-$sql1 = "SELECT * FROM the_deadly_chamber WHERE date BETWEEN '$today' AND '$twoDaysLater'";
-$sql2 = "SELECT * FROM the_nuclear_bunker WHERE date BETWEEN '$today' AND '$twoDaysLater'";
-$sql3 = "SELECT * FROM killbill WHERE date BETWEEN '$today' AND '$twoDaysLater'";
-$sql4 = "SELECT * FROM ransom WHERE date BETWEEN '$today' AND '$twoDaysLater'";
-$sql5 = "SELECT * FROM ruins_of_hampi WHERE date BETWEEN '$today' AND '$twoDaysLater'";
+$twoWeeksLater = date("Y-m-d", strtotime("+14 days"));
+
+$sql1 = "SELECT *, 'The Deadly Chamber' AS game FROM deadly_chamber WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
+$sql2 = "SELECT *, 'The Nuclear Bunker' AS game FROM the_nuclear_bunker WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
+$sql3 = "SELECT *, 'KillBill' AS game FROM killbill WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
+$sql4 = "SELECT *, 'Ransom' AS game FROM ransom WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
+$sql5 = "SELECT *, 'Ruins of Hampi' AS game FROM ruins_of_hampi WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
 
 $result1 = $conn->query($sql1);
 $result2 = $conn->query($sql2);
@@ -172,28 +171,34 @@ $result5 = $conn->query($sql5);
             <th>No. of Players</th>
             <th>Timeslot_id</th>
             <th>Transaction ID</th>
+            <th>Game</th>
             <th>Action</th> <!-- New column for delete button -->
         </tr>
     </thead>
     <tbody>
 
-    <?php if ($result1->num_rows > 0): ?>
-        <?php while ($row = $result1->fetch_assoc()): ?>
-            <tr>
-                <td><?= $row['id'] ?></td>
-                <td><?= $row['name'] ?></td>
-                <td><?= $row['email'] ?></td>
-                <td><?= $row['mobile'] ?></td>
-                <td><?= $row['date'] ?></td>
-                <td><?= $row['no_of_players'] ?></td>
-                <td><?= $row['timeslot_id'] ?></td>
-                <td><?= $row['txnID'] ?></td>
-                <td><a href="?delete_id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a></td> <!-- Delete button -->
-            </tr>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <tr><td colspan="9">No records found</td></tr>
-    <?php endif; ?>
+    <?php 
+    $results = [$result1, $result2, $result3, $result4, $result5];
+    foreach ($results as $result) {
+        if ($result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['email'] ?></td>
+                    <td><?= $row['mobile'] ?></td>
+                    <td><?= $row['date'] ?></td>
+                    <td><?= $row['no_of_players'] ?></td>
+                    <td><?= $row['timeslot_id'] ?></td>
+                    <td><?= $row['txnID'] ?></td>
+                    <td><?= $row['game'] ?></td>
+                    <td><a href="?delete_id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a></td> <!-- Delete button -->
+                </tr>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <tr><td colspan="10">No records found</td></tr>
+        <?php endif;
+    } ?>
 
     </tbody>
 </table>

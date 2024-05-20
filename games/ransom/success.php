@@ -41,8 +41,8 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
 
              // Content
              $mail->isHTML(true);                                  // Set email format to HTML
-             $mail->Subject = 'Bulk Booking Successful for Ransom';
-             $mail->Body = "Name: $name<br>Email: $email<br>Phone: $mobile<br>Date: $date<br>Timeslot: $timeslot<br>No. of Players: $qty<br>Advance Paid: $amount<br>TransactionId: $transactionId";
+             $mail->Subject = 'Booking Successful for Ransom';
+             $mail->Body = "Name: $name<br>Email: $email<br>Phone: $mobile<br>Date: $date<br>Timeslot: $timeslot<br>No. of Players: $qty<br>Advance Paid: $amount<br>TransactionId: $tran_id";
              // Send email 
              $mail->send();
             
@@ -100,12 +100,11 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
       <i class="checkmark">✓</i>
     </div>
 
-    <h1>Success</h1>
+    <h1>Booking Successful for Ransom</h1>
     <p>Name: <?php echo $name; ?></p>
     <p>Email: <?php echo $email; ?></p>
     <p>Date: <?php echo $date; ?></p>
     <p>Timeslot: <?php echo $timeslot; ?></p>
-    <p>Mobile: <?php echo $mobile; ?></p>
     <p>No of Players: <?php echo $qty; ?></p>
     <p>Amount paid : <?php echo $amount; ?></p>
     <p>Transaction ID: <?php echo $tran_id ?></p>

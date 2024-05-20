@@ -13,7 +13,7 @@ session_start();
 
 // Check if all required POST and SESSION variables are set
 if (!isset($_POST['merchantId'], $_POST['transactionId'], $_SESSION['name'], $_SESSION['email'], $_SESSION['date'], $_SESSION['timeslot'], $_SESSION['mobile'], $_SESSION['qty'], $_SESSION['amount'])) {
-    echo "Retry again....";
+    echo "Something went wrong, Please contact us";
     exit;
 }
 
