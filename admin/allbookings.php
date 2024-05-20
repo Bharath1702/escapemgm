@@ -52,9 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Retrieve data for next 2 days
 $today = date("Y-m-d");
 $twoDaysLater = date("Y-m-d", strtotime("+14 days"));
-
+$game = 'deadly_chamber'
 // You were overwriting $sql variable, let's use different variables for each query
-$sql1 = "SELECT * FROM deadly_chamber WHERE date BETWEEN '$today' AND '$twoDaysLater'";
+$sql1 = "SELECT * FROM the_deadly_chamber WHERE date BETWEEN '$today' AND '$twoDaysLater'";
 $sql2 = "SELECT * FROM the_nuclear_bunker WHERE date BETWEEN '$today' AND '$twoDaysLater'";
 $sql3 = "SELECT * FROM killbill WHERE date BETWEEN '$today' AND '$twoDaysLater'";
 $sql4 = "SELECT * FROM ransom WHERE date BETWEEN '$today' AND '$twoDaysLater'";

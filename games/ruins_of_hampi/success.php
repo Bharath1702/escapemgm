@@ -23,12 +23,12 @@ if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['dat
          try {
              //Server settings
              $mail->isSMTP();                                      // Set mailer to use SMTP
-         $mail->Host       = 'smtp-relay.brevo.com';          // Specify main and backup SMTP servers
-         $mail->SMTPAuth   = true;                             // Enable SMTP authentication
-         $mail->Username   = '74bba4001@smtp-brevo.com';           // SMTP username
-         $mail->Password   = 'Z1HATDU6V0gSBq78';                // SMTP password
-         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
-         $mail->Port       = 587;                              // TCP port to connect to
+        $mail->Host       = 'smtp.gmail.com';          // Specify main and backup SMTP servers
+        $mail->SMTPAuth   = true;                             // Enable SMTP authentication
+        $mail->Username   = 'brackets.developer17@gmail.com';           // SMTP username
+        $mail->Password   = 'nzrlvzmsdobatsfn';                // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
+        $mail->Port       = 587;                              // TCP port to connect to
 
              //Recipients
              $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
