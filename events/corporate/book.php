@@ -40,8 +40,8 @@ if (isset($_POST['name'])) {
 
             //Recipients
             $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
-            $mail->addAddress($email, $name); 
-            $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');    // Add a recipient
+            $mail->addAddress($email, $name);
+            $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');     // Add a recipient
             $mail->addAddress('escapemgm@escapemgm.com');               // Name is optional
             $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
             $mail->addCC('cc@example.com');
@@ -49,7 +49,7 @@ if (isset($_POST['name'])) {
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Bulk Booking Successful for Corporate Party We will confirm shortly.';
+            $mail->Subject = 'Bulk Booking Successful for Birthday We will confirm shortly';
             $mail->Body = "
             <!DOCTYPE html>
             <html lang='en'>
@@ -116,7 +116,6 @@ if (isset($_POST['name'])) {
         }
 
         // Close the statement
-        $stmt->close();
     } else {
         echo "<script>alert('Error occurred while inserting data into database')</script>";
     }
