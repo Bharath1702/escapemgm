@@ -1,3 +1,10 @@
+<?php
+session_start();
+$_SESSION = [];
+
+// Destroy the session
+session_destroy();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -68,10 +68,77 @@ $conn->close();
              // Content
              $mail->isHTML(true);                                  // Set email format to HTML
              $mail->Subject = 'Booking Successful for Killbill';
-             $mail->Body = "Name: $name<br>Email: $email<br>Phone: $mobile<br>Date: $date<br>Timeslot: $time<br>No. of Players: $qty<br>Advance Paid: $amount<br>TransactionId: $tran_id";
+    $mail->Body    = '
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Booking Successful</title>
+        <style>
+            .table {
+                display: block;
+                margin: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            thead {
+                width: 100%;
+            }
+            th {
+                border: 2px solid black;
+                width: 200px;
+            }
+            .header {
+                background-color: gold;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h1>Booking Successful</h1>
+            <img src="https://escapemgm.com/Gallary/escapelogo.webp" width="200px" height="auto" alt="Escape Room Logo">
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="header">Name</th>
+                            <th>'$name'</th>
+                        </tr>
+                        <tr>
+                            <th class="header">Email</th>
+                            <th>'$mail'</th>
+                        </tr>
+                        <tr>
+                            <th class="header">Date</th>
+                            <th>'$date'</th>
+                        </tr>
+                        <tr>
+                            <th class="header">TimeSlot</th>
+                            <th>'$time'</th>
+                        </tr>
+                        <tr>
+                            <th class="header">No. Of Players</th>
+                            <th>'$qty'</th>
+                        </tr>
+                        <tr>
+                            <th class="header">Advance Paid</th>
+                            <th>'$amount'</th>
+                        </tr>
+                        <tr>
+                            <th class="header">Transaction ID</th>
+                            <th>'$tran_id'</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </center>
+    </body>
+    </html>
+    ';
              // Send email 
              $mail->send();
-            
             //  echo "<script>alert('sent successfully');window.location.href = 'success.php';</script>";
             
          } catch (Exception $e) {
