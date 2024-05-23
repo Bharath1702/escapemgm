@@ -50,8 +50,67 @@ if (isset($_POST['name'])) {
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Bulk Booking Successful for Corporate Party We will confirm shortly.';
-            $mail->Body    = "Name: $name<br>Email: $email<br>Phone: $phone<br>Date : $date  <br>No. of Players: $qty <br>Event Details : $details";
-            // Send email 
+            $mail->Body = "
+            <!DOCTYPE html>
+            <html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Booking Successful</title>
+                <style>
+                    .table {
+                        display: block;
+                        margin: auto;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    thead {
+                        width: 100%;
+                    }
+                    th {
+                        border: 2px solid black;
+                        width: 200px;
+                    }
+                    .header {
+                        background-color: gold;
+                    }
+                </style>
+            </head>
+            <body>
+                <center>
+                    <h1>Booking Successful</h1>
+                    <a href='https://escapemgm.com'><img src='https://escapemgm.com/Gallary/escapelogo.webp' width='200px' height='auto' alt='Escape Room Logo'></a>
+                    <div class='table'>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class='header'>Name</th>
+                                    <th>$name</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>Email</th>
+                                    <th>$email</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>Date</th>
+                                    <th>$date</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>TimeSlot</th>
+                                    <th>$time</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>No. Of Players</th>
+                                    <th>$qty</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </center>
+            </body>
+            </html>
+        ";            // Send email 
             $mail->send();
             
             echo "<script>alert('sent successfully');window.location.href = './';</script>";
