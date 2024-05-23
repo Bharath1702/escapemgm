@@ -5,145 +5,152 @@ require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 session_start();
-if(isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['date']) && isset($_SESSION['timeslot']) && isset($_SESSION['mobile']) && isset($_SESSION['qty']) && isset($_SESSION['amount']) && isset($_SESSION['transactionId']) && isset($_SESSION['tran_id'])) {
+if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['date']) && isset($_SESSION['timeslot']) && isset($_SESSION['mobile']) && isset($_SESSION['qty']) && isset($_SESSION['amount']) && isset($_SESSION['transactionId']) && isset($_SESSION['tran_id'])) {
     // Retrieve session variables
-    $name     = $_SESSION['name'];
-    $email    = $_SESSION['email'];
-    $date     = $_SESSION['date'];
+    $name = $_SESSION['name'];
+    $email = $_SESSION['email'];
+    $date = $_SESSION['date'];
     $timeslot = $_SESSION['timeslot'];
-    $mobile   = $_SESSION['mobile'];
-    $qty      = $_SESSION['qty'];
-    $amount   = $_SESSION['amount'];
+    $mobile = $_SESSION['mobile'];
+    $qty = $_SESSION['qty'];
+    $amount = $_SESSION['amount'];
     $transactionId = $_SESSION['transactionId'];
     $tran_id = $_SESSION['tran_id'];
+    
     include './utils/db.php';
-
-// Assuming you have a database connection in db.php like:
-// $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Prepare and bind
-if ($stmt = $conn->prepare("SELECT time FROM timeslots WHERE id = ?")) {
-    $stmt->bind_param("i", $timeslot); // "i" indicates the type is integer
-    $stmt->execute();
+    // Assuming you have a database connection in db.php like:
+    // $conn = new mysqli($servername, $username, $password, $dbname);
     
-    // Bind result variables
-    $stmt->bind_result($time);
-    
-    // Fetch value
-    while ($stmt->fetch()) {
-        echo $time;
+    // Check database connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    // Close statement
-    $stmt->close();
+    // Prepare and bind
+    if ($stmt = $conn->prepare("SELECT time FROM timeslots WHERE id = ?")) {
+        $stmt->bind_param("i", $timeslot); // "i" indicates the type is integer
+        $stmt->execute();
+        
+        // Bind result variables
+        $stmt->bind_result($time);
+        
+        // Fetch value
+        $stmt->fetch();
+        
+        // Close statement
+        $stmt->close();
+    } else {
+        echo "Error preparing statement: " . $conn->error;
+    }
+
+    // Close connection
+    $conn->close();
+    
+    $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'brackets.developer17@gmail.com';
+        $mail->Password = 'nzrlvzmsdobatsfn';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
+        $mail->addAddress($email, $name);
+        $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');
+        $mail->addAddress('escapemgm@escapemgm.com');
+        $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
+        $mail->addCC('cc@example.com');
+        $mail->addBCC('bcc@example.com');
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'Booking Successful for Ruins Of Hampi';
+        $mail->Body = "
+            <!DOCTYPE html>
+            <html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Booking Successful</title>
+                <style>
+                    .table {
+                        display: block;
+                        margin: auto;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    thead {
+                        width: 100%;
+                    }
+                    th {
+                        border: 2px solid black;
+                        width: 200px;
+                    }
+                    .header {
+                        background-color: gold;
+                    }
+                </style>
+            </head>
+            <body>
+                <center>
+                    <h1>Booking Successful</h1>
+                    <a href='https://escapemgm.com'><img src='https://escapemgm.com/Gallary/escapelogo.webp' width='200px' height='auto' alt='Escape Room Logo'></a>
+                    <div class='table'>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class='header'>Name</th>
+                                    <th>$name</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>Email</th>
+                                    <th>$email</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>Date</th>
+                                    <th>$date</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>TimeSlot</th>
+                                    <th>$time</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>No. Of Players</th>
+                                    <th>$qty</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>Advance Paid</th>
+                                    <th>$amount</th>
+                                </tr>
+                                <tr>
+                                    <th class='header'>Transaction ID</th>
+                                    <th>$tran_id</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </center>
+            </body>
+            </html>
+        ";
+        $mail->AltBody = 'Booking Successful for Ruins Of Hampi. Check your email for details.';
+
+        // Send email
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}')</script>";
+    }
 } else {
-    echo "Error preparing statement: " . $conn->error;
+    echo "Required session variables are missing.";
 }
-
-// Close connection
-$conn->close();
-}
- $mail = new PHPMailer(true);
-
-         try {
-             //Server settings
-             $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host       = 'smtp.gmail.com';          // Specify main and backup SMTP servers
-        $mail->SMTPAuth   = true;                             // Enable SMTP authentication
-        $mail->Username   = 'brackets.developer17@gmail.com';           // SMTP username
-        $mail->Password   = 'nzrlvzmsdobatsfn';                // SMTP password
-        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
-        $mail->Port       = 587;                              // TCP port to connect to
-
-             //Recipients
-             $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
-             $mail->addAddress($email, $name);
-             $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');     // Add a recipient
-             $mail->addAddress('escapemgm@escapemgm.com');               // Name is optional
-             $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
-             $mail->addCC('cc@example.com');
-             $mail->addBCC('bcc@example.com');
-
-             // Content
-             $mail->isHTML(true);                                  // Set email format to HTML
-             $mail->Subject = 'Booking Successful for Ruins of Hampi';
-             $mail->Body    = '
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Booking Successful</title>
-        <style>
-            .table {
-                display: block;
-                margin: auto;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            thead {
-                width: 100%;
-            }
-            th {
-                border: 2px solid black;
-                width: 200px;
-            }
-            .header {
-                background-color: gold;
-            }
-        </style>
-    </head>
-    <body>
-        <center>
-            <h1>Booking Successful</h1>
-            <img src="https://escapemgm.com/Gallary/escapelogo.webp" width="200px" height="auto" alt="Escape Room Logo">
-            <div class="table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="header">Name</th>
-                            <th>'$name'</th>
-                        </tr>
-                        <tr>
-                            <th class="header">Email</th>
-                            <th>'$mail'</th>
-                        </tr>
-                        <tr>
-                            <th class="header">Date</th>
-                            <th>'$date'</th>
-                        </tr>
-                        <tr>
-                            <th class="header">TimeSlot</th>
-                            <th>'$time'</th>
-                        </tr>
-                        <tr>
-                            <th class="header">No. Of Players</th>
-                            <th>'$qty'</th>
-                        </tr>
-                        <tr>
-                            <th class="header">Advance Paid</th>
-                            <th>'$amount'</th>
-                        </tr>
-                        <tr>
-                            <th class="header">Transaction ID</th>
-                            <th>'$tran_id'</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </center>
-    </body>
-    </html>
-    ';             // Send email 
-             $mail->send();
-            
-            //  echo "<script>alert('sent successfully');window.location.href = 'success.php';</script>";
-            
-         } catch (Exception $e) {
-             echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}')</script>";
-         }
 ?>
 <html>
 <head>
@@ -193,16 +200,16 @@ $conn->close();
       <i class="checkmark">✓</i>
     </div>
 
-    <h1>Booking Successful for Ruins of Hampi</h1>
-    <p>Name: <?php echo $name; ?></p>
-    <p>Email: <?php echo $email; ?></p>
-    <p>Date: <?php echo $date; ?></p>
-    <p>Timeslot: <?php echo $time; ?></p>
-    <p>No of Players: <?php echo $qty; ?></p>
-    <p>Amount paid : <?php echo $amount; ?></p>
-    <p>Transaction ID: <?php echo $tran_id ?></p>
+    <h1>Booking Successful for Ruins Of Hampi</h1>
+    <p>Name: <?php echo htmlspecialchars($name); ?></p>
+    <p>Email: <?php echo htmlspecialchars($email); ?></p>
+    <p>Date: <?php echo htmlspecialchars($date); ?></p>
+    <p>Timeslot: <?php echo htmlspecialchars($time); ?></p>
+    <p>No of Players: <?php echo htmlspecialchars($qty); ?></p>
+    <p>Amount paid : <?php echo htmlspecialchars($amount); ?></p>
+    <p>Transaction ID: <?php echo htmlspecialchars($tran_id); ?></p>
     <p>We received your purchase request;<br /> we'll be in touch shortly!</p>
-    <p>check your spam mail folder if you dont receive any mails yet</p><br><a href="../../" style="font-size:30px">go back</a>
+    <p>Check your spam mail folder if you don't receive any mails yet</p><br><a href="../../" style="font-size:30px">Go back</a>
   </div>
 </body>
 <?php
@@ -212,5 +219,4 @@ $_SESSION = [];
 // Destroy the session
 session_destroy();
 ?>
-
 </html>
