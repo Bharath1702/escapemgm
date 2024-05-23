@@ -48,7 +48,7 @@ session_destroy();
           <div class="dropdown-content">
           <a href="https://escapemgm.com/events/birthday/">Birthday</a>
           <a href="https://escapemgm.com/events/party/">Parties</a>
-          <a href="https://escapemgm.com/event/corporate/">Corporate Booking</a>        
+          <a href="https://escapemgm.com/events/corporate/">Corporate Booking</a>        
           </div>
         </div></li>
         <li><a href="https://escapemgm.com/price_chart/">Price List</a></li>
