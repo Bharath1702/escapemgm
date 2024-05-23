@@ -96,10 +96,6 @@ if(isset($_POST['name'])){
                                     <th>$date</th>
                                 </tr>
                                 <tr>
-                                    <th class='header'>TimeSlot</th>
-                                    <th>$time</th>
-                                </tr>
-                                <tr>
                                     <th class='header'>No. Of Players</th>
                                     <th>$qty</th>
                                 </tr>
