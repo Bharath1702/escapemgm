@@ -49,7 +49,7 @@ if (isset($_POST['name'])) {
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Bulk Booking Enquiry Initiated for Birthday We will confirm shortly';
+            $mail->Subject = 'Bulk Booking Enquiry Initiated for Party, We will confirm shortly';
             $mail->Body = "
             <!DOCTYPE html>
             <html lang='en'>
@@ -128,7 +128,9 @@ Or  <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'>click here</a>
                     </ol>
                 </p>
                 <h3><b>We at Escape room are looking forward to host you. Meanwhile you can get to know our team better.</b></h3>
-                <img src='https://escapemgm.com/Gallary/teamimg.jpeg' width='200px' height='auto' alt='Escape Team'>
+                <center>
+                    <img src='https://escapemgm.com/Gallary/teamimg.jpeg' width='80%' height='auto' alt='Escape Team'>
+                </center>
             </body>
             </html>
         ";            // Send email 
