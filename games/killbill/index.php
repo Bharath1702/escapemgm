@@ -223,9 +223,9 @@ session_destroy();
             <a href="https://escapemgm.com/gallery/" class="footer-link">Gallery</a>
           </li>
 
-          <li>
+          <!--<li>
             <a href="https://escapemgm.com/events/" class="footer-link">Bulk booking</a>
-          </li>
+          </li> -->
 
           <li>
             <a href="https://escapemgm.com/whats-coming-next/" class="footer-link"></a>
