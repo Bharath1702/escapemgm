@@ -72,73 +72,97 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['da
         $mail->isHTML(true);
         $mail->Subject = 'Booking Successful for Ruins Of Hampi';
         $mail->Body = "
-            <!DOCTYPE html>
-            <html lang='en'>
-            <head>
-                <meta charset='UTF-8'>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>Booking Successful</title>
-                <style>
-                    .table {
-                        display: block;
-                        margin: auto;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-                    thead {
-                        width: 100%;
-                    }
-                    th {
-                        border: 2px solid black;
-                        width: 200px;
-                    }
-                    .header {
-                        background-color: gold;
-                    }
-                </style>
-            </head>
-            <body>
-                <center>
-                    <h1>Booking Successful</h1>
-                    <a href='https://escapemgm.com'><img src='https://escapemgm.com/Gallary/escapelogo.webp' width='200px' height='auto' alt='Escape Room Logo'></a>
-                    <div class='table'>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class='header'>Name</th>
-                                    <th>$name</th>
-                                </tr>
-                                <tr>
-                                    <th class='header'>Email</th>
-                                    <th>$email</th>
-                                </tr>
-                                <tr>
-                                    <th class='header'>Date</th>
-                                    <th>$date</th>
-                                </tr>
-                                <tr>
-                                    <th class='header'>TimeSlot</th>
-                                    <th>$time</th>
-                                </tr>
-                                <tr>
-                                    <th class='header'>No. Of Players</th>
-                                    <th>$qty</th>
-                                </tr>
-                                <tr>
-                                    <th class='header'>Advance Paid</th>
-                                    <th>$amount</th>
-                                </tr>
-                                <tr>
-                                    <th class='header'>Transaction ID</th>
-                                    <th>$tran_id</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </center>
-            </body>
-            </html>
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <link rel='shortcut icon' href='https://escapemgm.com/Gallary/escapelogo.webp' type='image/x-icon'>
+            <title>Booking Successful</title>
+            <style>
+                .table {
+                    display: block;
+                    margin: auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                thead {
+                    width: 100%;
+                }
+                th {
+                    border: 2px solid black;
+                    width: 200px;
+                }
+                .header {
+                    background-color: gold;
+                }
+            </style>
+        </head>
+        <body>
+            <center>
+                <a href='https://escapemgm.com'><img src='https://escapemgm.com/Gallary/escapelogo.webp' width='200px' height='auto' alt='Escape Room Logo'></a>
+                <h1>Booking Successful</h1>
+                <div class='table'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class='header'>Name</th>
+                                <th>$name</th>
+                            </tr>
+                            <tr>
+                                <th class='header'>Email</th>
+                                <th>$email</th>
+                            </tr>
+                            <tr>
+                                <th class='header'>Phone No.</th>
+                                <th>$mobile</th>
+                            </tr>
+                            <tr>
+                                <th class='header'>Date</th>
+                                <th>$date</th>
+                            </tr>
+                            <tr>
+                                <th class='header'>TimeSlot</th>
+                                <th>$time</th>
+                            </tr>
+                            <tr>
+                                <th class='header'>No. Of Players</th>
+                                <th>$qty</th>
+                            </tr>
+                            <tr>
+                                <th class='header'>Advance Paid</th>
+                                <th>$amount</th>
+                            </tr>
+                            <tr>
+                                <th class='header'>Transaction ID</th>
+                                <th>$tran_id</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </center>
+            <p>
+            Your Booking is confirmed! We look forward to providing you a memorable experience at our Escape room. For any further queries or information regarding our offerings, you can reach out to us at <a href='tel:7676372273'>+91 7676372273</a>.<br>
+            Our Address: Escape room, 3rd Floor Pragati Mansion, 1st Cross Rd, 5th Block, Koramangala, Karnataka 560034.
+Or  <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'>click here</a>
+            <br>
+            Please reach the location at least 10 minutes before the slot time for a hassle free experience as there would be activities like filling up the consent forms, briefing about the game and payments, which might take some time.
+            <br>
+            <h3>Important Notice</h3>
+                <ol>
+                    <li>
+                    In case of any delays, please note that we might have to deduct some time from your slot to ensure that it doesn’t affect the next slots of the day.
+                    </li>
+                    <li>
+                    In case of cancellations, You would have to inform us through call at least 3 hours before your time schedule, as the deposit is non-refundable, it can only be rescheduled based on the availability.
+                    </li>
+                </ol>
+            </p>
+            <h3><b>We at Escape room are looking forward to host you. Meanwhile you can get to know our team better.</b></h3>
+            <img src='https://escapemgm.com/Gallary/teamimg.jpeg' width='200px' height='auto' alt='Escape Team'>
+        </body>
+        </html>
         ";
         $mail->AltBody = 'Booking Successful for Ruins Of Hampi. Check your email for details.';
 
