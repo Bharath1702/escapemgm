@@ -112,8 +112,9 @@ if (isset($_POST['name'])) {
                 </center>
                 <p>
                 Enquiry Initiated ! We look forward to providing you a memorable experience at our Escape room. For any further queries or information regarding our offerings, you can reach out to us at <a href='tel:7676372273'>+91 7676372273</a>.<br>
-                Our Address: Escape room, 3rd Floor Pragati Mansion, 1st Cross Rd, 5th Block, Koramangala, Karnataka 560034.
-Or  <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'>click here</a>
+                <br>
+                <b>Our Address: </b> <br>Escape room, 3rd Floor Pragati Mansion,<br> 1st Cross Rd, 5th Block, Koramangala,<br> Karnataka 560034.
+Or  <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'> click here</a> <br><br>
                 <br>
                 Please reach the location at least 10 minutes before the slot time for a hassle free experience as there would be activities like filling up the consent forms, briefing about the game and payments, which might take some time.
                 <br>
