@@ -53,11 +53,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $today = date("Y-m-d");
 $twoWeeksLater = date("Y-m-d", strtotime("+14 days"));
 
-$sql1 = "SELECT *, 'The Deadly Chamber' AS game FROM deadly_chamber WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
-$sql2 = "SELECT *, 'The Nuclear Bunker' AS game FROM the_nuclear_bunker WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
-$sql3 = "SELECT *, 'KillBill' AS game FROM killbill WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
-$sql4 = "SELECT *, 'Ransom' AS game FROM ransom WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
-$sql5 = "SELECT *, 'Ruins of Hampi' AS game FROM ruins_of_hampi WHERE date BETWEEN '$today' AND '$twoWeeksLater'";
+// Updated SQL queries to include timeslot times
+$sql1 = "SELECT dc.*, t.time AS timeslot_time, 'The Deadly Chamber' AS game 
+         FROM deadly_chamber dc
+         JOIN timeslots t ON dc.timeslot_id = t.id
+         WHERE dc.date BETWEEN '$today' AND '$twoWeeksLater'";
+
+$sql2 = "SELECT nb.*, t.time AS timeslot_time, 'The Nuclear Bunker' AS game 
+         FROM the_nuclear_bunker nb
+         JOIN timeslots t ON nb.timeslot_id = t.id
+         WHERE nb.date BETWEEN '$today' AND '$twoWeeksLater'";
+
+$sql3 = "SELECT kb.*, t.time AS timeslot_time, 'KillBill' AS game 
+         FROM killbill kb
+         JOIN timeslots t ON kb.timeslot_id = t.id
+         WHERE kb.date BETWEEN '$today' AND '$twoWeeksLater'";
+
+$sql4 = "SELECT r.*, t.time AS timeslot_time, 'Ransom' AS game 
+         FROM ransom r
+         JOIN timeslots t ON r.timeslot_id = t.id
+         WHERE r.date BETWEEN '$today' AND '$twoWeeksLater'";
+
+$sql5 = "SELECT rh.*, t.time AS timeslot_time, 'Ruins of Hampi' AS game 
+         FROM ruins_of_hampi rh
+         JOIN timeslots t ON rh.timeslot_id = t.id
+         WHERE rh.date BETWEEN '$today' AND '$twoWeeksLater'";
 
 $result1 = $conn->query($sql1);
 $result2 = $conn->query($sql2);
@@ -189,7 +209,7 @@ $result5 = $conn->query($sql5);
                     <td><?= $row['mobile'] ?></td>
                     <td><?= $row['date'] ?></td>
                     <td><?= $row['no_of_players'] ?></td>
-                    <td><?= $row['timeslot_id'] ?></td>
+                    <td><?= $row['timeslot_time'] ?></td>
                     <td><?= $row['txnID'] ?></td>
                     <td><?= $row['game'] ?></td>
                     <td><a href="?delete_id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a></td> <!-- Delete button -->

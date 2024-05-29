@@ -11,10 +11,11 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     session_destroy(); // Destroy the session
     header("Location: index.html"); // Redirect to login page
     exit;
-
 }
+
 // Database connection
 include 'db.php';
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -49,11 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Retrieve data for next 2 days
+// Retrieve data for next 14 days
 $today = date("Y-m-d");
 $twoDaysLater = date("Y-m-d", strtotime("+14 days"));
 
-$sql = "SELECT * FROM ransom WHERE date BETWEEN '$today' AND '$twoDaysLater'";
+$sql = "SELECT dc.*, ts.time 
+        FROM ransom dc
+        JOIN timeslots ts ON dc.timeslot_id = ts.id
+        WHERE dc.date BETWEEN '$today' AND '$twoDaysLater'";
 $result = $conn->query($sql);
 ?>
 
@@ -97,6 +101,10 @@ $result = $conn->query($sql);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+        }
+
+        button {
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -162,7 +170,7 @@ $result = $conn->query($sql);
             <th>Mobile</th>
             <th>Date</th>
             <th>No. of Players</th>
-            <th>Timeslot_id</th>
+            <th>Timeslot</th>
             <th>Transaction ID</th>
             <th>Action</th> <!-- New column for delete button -->
         </tr>
@@ -178,7 +186,7 @@ $result = $conn->query($sql);
                 <td><?= $row['mobile'] ?></td>
                 <td><?= $row['date'] ?></td>
                 <td><?= $row['no_of_players'] ?></td>
-                <td><?= $row['timeslot_id'] ?></td>
+                <td><?= $row['time'] ?></td> <!-- Display timeslot time -->
                 <td><?= $row['txnID'] ?></td>
                 <td><a href="?delete_id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a></td> <!-- Delete button -->
             </tr>
