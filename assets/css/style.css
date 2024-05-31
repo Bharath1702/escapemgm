@@ -244,10 +244,21 @@ body {
 .has-scrollbar {
   display: flex;
   gap: 30px;
+  /* overflow-x: auto; */
   
-  overflow-x: auto;
   padding-block-end: 30px;
   scroll-snap-type: inline mandatory;
+}
+
+@media screen and (max-width: 780px) {
+  .has-scrollbar {
+    display: flex;
+    gap: 30px;
+    /* overflow-x: auto; */
+    flex-direction: column;
+    padding-block-end: 30px;
+    scroll-snap-type: inline mandatory;
+  }
 }
 
 .has-scrollbar::-webkit-scrollbar { height: 10px; }
