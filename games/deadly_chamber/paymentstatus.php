@@ -2,31 +2,39 @@
 // Include necessary configuration and utility files
 require_once "./utils/config.php";
 require_once "./utils/common.php";
-require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
-require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
-require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 session_start();
 
-// Check if all required POST and SESSION variables are set
-if (!isset($_POST['merchantId'], $_POST['transactionId'], $_SESSION['name'], $_SESSION['email'], $_SESSION['date'], $_SESSION['timeslot'], $_SESSION['mobile'], $_SESSION['qty'], $_SESSION['amount'])) {
+// Function to retrieve POST data with a fallback to session data
+function get_post_or_session($key) {
+    return $_POST[$key] ?? $_SESSION[$key] ?? null;
+}
+
+// Retrieve data from POST or session
+$name = get_post_or_session('name');
+$email = get_post_or_session('email');
+$date = get_post_or_session('date');
+$timeslot = get_post_or_session('timeslot');
+$mobile = get_post_or_session('mobile');
+$qty = get_post_or_session('qty');
+$amount = get_post_or_session('amount');
+$merchantId = get_post_or_session('merchantId');
+$transactionId = get_post_or_session('transactionId');
+
+// Check if all required variables are set
+if (!$name || !$email || !$date || !$timeslot || !$mobile || !$qty || !$amount || !$merchantId || !$transactionId) {
     echo "Something went wrong, Please contact us If the payment was successful";
     exit;
 }
 
-// Assign SESSION and POST variables to local variables
-$name = $_SESSION['name'];
-$email = $_SESSION['email'];
-$date = $_SESSION['date'];
-$timeslot = $_SESSION['timeslot'];
-$mobile = $_SESSION['mobile'];
-$qty = $_SESSION['qty'];
-$amount = $_SESSION['amount'];
-$merchantId = $_POST['merchantId'];
-$transactionId = $_POST['transactionId'];
+// Save POST data to session if available
+$_SESSION['name'] = $name;
+$_SESSION['email'] = $email;
+$_SESSION['date'] = $date;
+$_SESSION['timeslot'] = $timeslot;
+$_SESSION['mobile'] = $mobile;
+$_SESSION['qty'] = $qty;
+$_SESSION['amount'] = $amount;
 $_SESSION['merchantId'] = $merchantId;
 $_SESSION['transactionId'] = $transactionId;
 

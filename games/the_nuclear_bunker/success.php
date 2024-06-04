@@ -15,7 +15,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['da
     $timeslot = $_SESSION['timeslot'];
     $mobile = $_SESSION['mobile'];
     $qty = $_SESSION['qty'];
-    $amount = $_SESSION['amount'];
+    $amount = $_SESSION['amount']/100;
     $transactionId = $_SESSION['transactionId'];
     $tran_id = $_SESSION['tran_id'];
     
