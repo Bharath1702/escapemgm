@@ -241,6 +241,7 @@ Or  <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'>click here</a>
 <?php
 session_start();
 $_SESSION = [];
+$_POST = [];
 
 // Destroy the session
 session_destroy();
