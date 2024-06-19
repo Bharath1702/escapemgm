@@ -1,10 +1,10 @@
 <?php
-require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
-require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
-require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
+ require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
+ require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
+ require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+ use PHPMailer\PHPMailer\PHPMailer;
+ use PHPMailer\PHPMailer\Exception;
 
 session_start();
 if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['date']) && isset($_SESSION['timeslot']) && isset($_SESSION['mobile']) && isset($_SESSION['qty']) && isset($_SESSION['amount']) && isset($_SESSION['transactionId']) && isset($_SESSION['tran_id'])) {
@@ -20,8 +20,6 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['da
     $tran_id = $_SESSION['tran_id'];
     
     include './utils/db.php';
-    // Assuming you have a database connection in db.php like:
-    // $conn = new mysqli($servername, $username, $password, $dbname);
     
     // Check database connection
     if ($conn->connect_error) {
@@ -48,132 +46,132 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['da
     // Close connection
     $conn->close();
     
-    $mail = new PHPMailer(true);
-    try {
-        // Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'brackets.developer17@gmail.com';
-        $mail->Password = 'nzrlvzmsdobatsfn';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+ $mail = new PHPMailer(true);
+ try {
+     // Server settings
+     $mail->isSMTP();
+     $mail->Host = 'smtp.gmail.com';
+     $mail->SMTPAuth = true;
+     $mail->Username = 'brackets.developer17@gmail.com';
+     $mail->Password = 'nzrlvzmsdobatsfn';
+     $mail->SMTPSecure = 'tls';
+     $mail->Port = 587;
 
-        // Recipients
-        $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
-        $mail->addAddress($email, $name);
-        $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');
-        $mail->addAddress('escapemgm@escapemgm.com');
-        $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
-        $mail->addCC('cc@example.com');
-        $mail->addBCC('bcc@example.com');
+     // Recipients
+     $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
+     $mail->addAddress($email, $name);
+     $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');
+     $mail->addAddress('escapemgm@escapemgm.com');
+     $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
+     $mail->addCC('cc@example.com');
+     $mail->addBCC('bcc@example.com');
 
-        // Content
-        $mail->isHTML(true);
-        $mail->Subject = 'Booking Successful for Deadly Chamber';
-        $mail->Body = "
-        <!DOCTYPE html>
-        <html lang='en'>
-        <head>
-            <meta charset='UTF-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <link rel='shortcut icon' href='https://escapemgm.com/Gallary/escapelogo.webp' type='image/x-icon'>
-            <title>Booking Successful</title>
-            <style>
-                .table {
-                    display: block;
-                    margin: auto;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                thead {
-                    width: 100%;
-                }
-                th {
-                    border: 2px solid black;
-                    width: 200px;
-                }
-                .header {
-                    background-color: gold;
-                }
-            </style>
-        </head>
-        <body>
-            <center>
-                <a href='https://escapemgm.com'><img src='https://escapemgm.com/Gallary/escapelogo.webp' width='200px' height='auto' alt='Escape Room Logo'></a>
-                <h1>Booking Successful</h1>
-                <div class='table'>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class='header'>Name</th>
-                                <th>$name</th>
-                            </tr>
-                            <tr>
-                                <th class='header'>Email</th>
-                                <th>$email</th>
-                            </tr>
-                            <tr>
-                                <th class='header'>Phone No.</th>
-                                <th>$mobile</th>
-                            </tr>
-                            <tr>
-                                <th class='header'>Date</th>
-                                <th>$date</th>
-                            </tr>
-                            <tr>
-                                <th class='header'>TimeSlot</th>
-                                <th>$time</th>
-                            </tr>
-                            <tr>
-                                <th class='header'>No. Of Players</th>
-                                <th>$qty</th>
-                            </tr>
-                            <tr>
-                                <th class='header'>Advance Paid</th>
-                                <th>$amount</th>
-                            </tr>
-                            <tr>
-                                <th class='header'>Transaction ID</th>
-                                <th>$tran_id</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </center>
-            <p>
-            Your Booking is confirmed! We look forward to providing you a memorable experience at our Escape room. For any further queries or information regarding our offerings, you can reach out to us at <a href='tel:7676372273'>+91 7676372273</a>.<br>
-            Our Address: Escape room, 3rd Floor Pragati Mansion, 1st Cross Rd, 5th Block, Koramangala, Karnataka 560034.
-Or  <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'>click here</a>
-            <br>
-            Please reach the location at least 10 minutes before the slot time for a hassle free experience as there would be activities like filling up the consent forms, briefing about the game and payments, which might take some time.
-            <br>
-            <h3>Important Notice</h3>
-                <ol>
-                    <li>
-                    In case of any delays, please note that we might have to deduct some time from your slot to ensure that it doesn’t affect the next slots of the day.
-                    </li>
-                    <li>
-                    In case of cancellations, You would have to inform us through call at least 3 hours before your time schedule, as the deposit is non-refundable, it can only be rescheduled based on the availability.
-                    </li>
-                </ol>
-            </p>
-            <h3><b>We at Escape room are looking forward to host you. Meanwhile you can get to know our team better.</b></h3>
-            <center>
-                    <img src='https://escapemgm.com/Gallary/teamimg.jpeg' width='80%' height='auto' alt='Escape Team'>
-                </center>
-        </body>
-        </html>
-        ";
-        $mail->AltBody = 'Booking Successful for Deadly Chamber. Check your email for details.';
+     // Content
+     $mail->isHTML(true);
+     $mail->Subject = 'Booking Successful for Deadly Chamber';
+     $mail->Body = "
+     <!DOCTYPE html>
+     <html lang='en'>
+     <head>
+         <meta charset='UTF-8'>
+         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+         <link rel='shortcut icon' href='https://escapemgm.com/Gallary/escapelogo.webp' type='image/x-icon'>
+         <title>Booking Successful</title>
+         <style>
+             .table {
+                 display: block;
+                 margin: auto;
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
+             }
+             thead {
+                 width: 100%;
+             }
+             th {
+                 border: 2px solid black;
+                 width: 200px;
+             }
+             .header {
+                 background-color: gold;
+             }
+         </style>
+     </head>
+     <body>
+         <center>
+             <a href='https://escapemgm.com'><img src='https://escapemgm.com/Gallary/escapelogo.webp' width='200px' height='auto' alt='Escape Room Logo'></a>
+             <h1>Booking Successful</h1>
+             <div class='table'>
+                 <table>
+                     <thead>
+                         <tr>
+                             <th class='header'>Name</th>
+                             <th>$name</th>
+                         </tr>
+                         <tr>
+                             <th class='header'>Email</th>
+                             <th>$email</th>
+                         </tr>
+                         <tr>
+                             <th class='header'>Phone No.</th>
+                             <th>$mobile</th>
+                         </tr>
+                         <tr>
+                             <th class='header'>Date</th>
+                             <th>$date</th>
+                         </tr>
+                         <tr>
+                             <th class='header'>TimeSlot</th>
+                             <th>$time</th>
+                         </tr>
+                         <tr>
+                             <th class='header'>No. Of Players</th>
+                             <th>$qty</th>
+                         </tr>
+                         <tr>
+                             <th class='header'>Advance Paid</th>
+                             <th>$amount</th>
+                         </tr>
+                         <tr>
+                             <th class='header'>Transaction ID</th>
+                             <th>$tran_id</th>
+                         </tr>
+                     </thead>
+                 </table>
+             </div>
+         </center>
+         <p>
+         Your Booking is confirmed! We look forward to providing you a memorable experience at our Escape room. For any further queries or information regarding our offerings, you can reach out to us at <a href='tel:7676372273'>+91 7676372273</a>.<br>
+         Our Address: Escape room, 3rd Floor Pragati Mansion, 1st Cross Rd, 5th Block, Koramangala, Karnataka 560034.
+          Or  <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'>click here</a>
+         <br>
+         Please reach the location at least 10 minutes before the slot time for a hassle free experience as there would be activities like filling up the consent forms, briefing about the game and payments, which might take some time.
+         <br>
+         <h3>Important Notice</h3>
+             <ol>
+                 <li>
+                 In case of any delays, please note that we might have to deduct some time from your slot to ensure that it doesn’t affect the next slots of the day.
+                 </li>
+                 <li>
+                 In case of cancellations, You would have to inform us through call at least 3 hours before your time schedule, as the deposit is non-refundable, it can only be rescheduled based on the availability.
+                 </li>
+             </ol>
+         </p>
+         <h3><b>We at Escape room are looking forward to host you. Meanwhile you can get to know our team better.</b></h3>
+         <center>
+                 <img src='https://escapemgm.com/Gallary/teamimg.jpeg' width='80%' height='auto' alt='Escape Team'>
+             </center>
+     </body>
+     </html>
+     ";
+     $mail->AltBody = 'Booking Successful for Deadly Chamber. Check your email for details.';
 
-        // Send email
-        $mail->send();
-        echo 'Message has been sent';
-    } catch (Exception $e) {
-        echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}')</script>";
-    }
+     // Send email
+     $mail->send();
+     echo 'Message has been sent';
+ } catch (Exception $e) {
+     echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}')</script>";
+ }
 } else {
     echo "Required session variables are missing.";
 }
@@ -241,7 +239,7 @@ Or  <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'>click here</a>
 <?php
 session_start();
 $_SESSION = [];
-$_POST = [];
+
 // Destroy the session
 session_destroy();
 ?>

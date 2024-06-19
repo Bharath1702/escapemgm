@@ -24,7 +24,7 @@ curl_close($ch);
 // Check if all required POST data is set
 if (isset($_POST['name'], $_POST['email'], $_POST['date'], $_POST['timeslot'], $_POST['mobile'], $_POST['qty'], $_POST['amount'])) {
     session_start();
-
+    session_regenerate_id();
     // Function to generate a random value
     function generateRandomValue()
     {
