@@ -25,23 +25,6 @@ curl_close($ch);
 if (isset($_POST['name'], $_POST['email'], $_POST['date'], $_POST['timeslot'], $_POST['mobile'], $_POST['qty'], $_POST['amount'])) {
     session_start();
     session_regenerate_id();
-    // Function to generate a random value
-    function generateRandomValue()
-    {
-        return bin2hex(random_bytes(16)); // Generate a 32-character hexadecimal random string
-    }
-
-    // Check if the random value cookie is set
-    if (!isset($_COOKIE['randomValue'])) {
-        // Generate a random value
-        $randomValue = generateRandomValue();
-
-        // Set the cookie with the random value for 1 day
-        setcookie('randomValue', $randomValue, time() + 6000, "/"); // 86400 seconds = 1 day
-    } else {
-        // Retrieve the random value from the cookie
-        $randomValue = $_COOKIE['randomValue'];
-    }
 
     // Assign POST data to session variables
     $_SESSION['name'] = $_POST['name'];
@@ -53,37 +36,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['date'], $_POST['timeslot'], $
     $_SESSION['amount'] = $_POST['amount'];
 
     // Insert data into the cart table
-    if (isset($_COOKIE['randomValue'])) {
-        // Database connection
-        require './utils/db.php';
-
-    // Check if a record with the same cookie_id already exists
-    $checkStmt = $conn->prepare("SELECT COUNT(*) as count FROM cart WHERE cookie_id = ?");
-    $checkStmt->bind_param("s", $randomValue);
-    $checkStmt->execute();
-    $result = $checkStmt->get_result();
-    $row = $result->fetch_assoc();
-    $count = $row['count'];
-    $checkStmt->close();
-
-    if ($count > 0) {
-        // If a record exists, delete it
-        $deleteStmt = $conn->prepare("DELETE FROM cart WHERE cookie_id = ?");
-        $deleteStmt->bind_param("s", $randomValue);
-        $deleteStmt->execute();
-        $deleteStmt->close();
-    }
-
-    // Prepare the SQL statement to insert data into the cart table
-    $insertStmt = $conn->prepare("INSERT INTO cart (cookie_id, name, email, mobile, date, no_of_players, timeslot_id,amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $insertStmt->bind_param("sssssisi", $randomValue, $_SESSION['name'], $_SESSION['email'], $_SESSION['mobile'], $_SESSION['date'], $_SESSION['qty'], $_SESSION['timeslot'], $_SESSION['amount']);
-
-    // Execute the statement and check for success
-    $insertStmt->execute();
-    // Close the statement and the database connection
-    $insertStmt->close();
-    $conn->close();
-} }else {
+    }else {
     echo "<script>alert('Please try clearing the browser cache and try again')</script>";
 }
 
