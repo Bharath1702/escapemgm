@@ -2,6 +2,8 @@
 require './utils/config.php';
 require './utils/common.php';
 
+
+
 // Check API status and set variables accordingly
 if (API_STATUS == 'LIVE') {
     $merchantid = MERCHANTIDLIVE;
@@ -25,7 +27,23 @@ curl_close($ch);
 if (isset($_POST['name'], $_POST['email'], $_POST['date'], $_POST['timeslot'], $_POST['mobile'], $_POST['qty'], $_POST['amount'])) {
     session_start();
     session_regenerate_id();
+    function generateRandomValue()
+    {
+        return bin2hex(random_bytes(16)); // Generate a 32-character hexadecimal random string
+    }
 
+    // Check if the random value cookie is set
+    if (!isset($_COOKIE['randomValue'])) {
+        // Generate a random value
+        $randomValue = generateRandomValue();
+
+        // Set the cookie with the random value for 1 day
+        setcookie('randomValue', $randomValue, time() + 6000, "/"); // 86400 seconds = 1 day
+    } else {
+        // Retrieve the random value from the cookie
+        $randomValue = generateRandomValue();
+        setcookie('randomValue', $randomValue, time() + 6000, "/"); 
+    }
     // Assign POST data to session variables
     $_SESSION['name'] = $_POST['name'];
     $_SESSION['email'] = $_POST['email'];
@@ -34,7 +52,39 @@ if (isset($_POST['name'], $_POST['email'], $_POST['date'], $_POST['timeslot'], $
     $_SESSION['mobile'] = $_POST['mobile'];
     $_SESSION['qty'] = $_POST['qty'];
     $_SESSION['amount'] = $_POST['amount'];
+    $paymentstatus = 'PENDING';
+    $game = "DEADLY CHAMBER";
+    if (isset($_COOKIE['randomValue'])) {
+        // Database connection
+        require './utils/db.php';
 
+    // Check if a record with the same cookie_id already exists
+    $checkStmt = $conn->prepare("SELECT COUNT(*) as count FROM cart WHERE cookie_id = ?");
+    $checkStmt->bind_param("s", $randomValue);
+    $checkStmt->execute();
+    $result = $checkStmt->get_result();
+    $row = $result->fetch_assoc();
+    $count = $row['count'];
+    $checkStmt->close();
+
+    if ($count > 0) {
+        // If a record exists, delete it
+        $deleteStmt = $conn->prepare("DELETE FROM cart WHERE cookie_id = ?");
+        $deleteStmt->bind_param("s", $randomValue);
+        $deleteStmt->execute();
+        $deleteStmt->close();
+    }
+
+    // Prepare the SQL statement to insert data into the cart table
+    $insertStmt = $conn->prepare("INSERT INTO cart (cookie_id, name, email, mobile,game, date, no_of_players, timeslot_id,amount,payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? , ?)");
+    $insertStmt->bind_param("ssssssisis", $randomValue, $_SESSION['name'], $_SESSION['email'], $_SESSION['mobile'],$game, $_SESSION['date'], $_SESSION['qty'], $_SESSION['timeslot'], $_SESSION['amount'],$paymentstatus);
+
+    // Execute the statement and check for success
+    $insertStmt->execute();
+    // Close the statement and the database connection
+    $insertStmt->close();
+    $conn->close();
+} 
     // Insert data into the cart table
     }else {
     echo "<script>alert('Please try clearing the browser cache and try again')</script>";

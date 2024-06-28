@@ -2,8 +2,21 @@
 // Include necessary configuration and utility files
 require_once "./utils/config.php";
 require_once "./utils/common.php";
+require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
+require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
+require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 session_start();
+
+$local_cookie_id = $_COOKIE['randomValue'] ?? null;
+
+if (!$local_cookie_id) {
+    echo "Cookie ID not found. Please enable cookies in your browser.";
+    exit;
+}
 
 // Function to retrieve POST data with a fallback to session data
 function get_post_or_session($key) {
@@ -23,7 +36,7 @@ $transactionId = get_post_or_session('transactionId');
 
 // Check if all required variables are set
 if (!$name || !$email || !$date || !$timeslot || !$mobile || !$qty || !$amount || !$merchantId || !$transactionId) {
-    echo "Something went wrong, Please contact us If the payment was successful";
+    echo "Something went wrong, please contact us if the payment was successful.";
     exit;
 }
 
@@ -97,15 +110,121 @@ if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS"
     // Prepare and execute SQL statement to insert booking details
     $stmt = $conn->prepare("INSERT INTO ransom (name, email, mobile, date, no_of_players, timeslot_id, txnID) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssss", $name, $email, $mobile, $date, $qty, $timeslot, $tran_id);
-    
+
     if ($stmt->execute()) {
-        header('Location:success.php');
+        $stmt->close();
+
+        // Update payment status in the cart table
+        $stmt = $conn->prepare("UPDATE cart SET payment_status='success' WHERE cookie_id=?");
+        $stmt->bind_param("s", $local_cookie_id);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            $conn->close();
+            header('Location: success.php');
+            exit;
+        } else {
+            echo "<script>alert('Failed to update payment status');</script>";
+            exit;
+        }
     } else {
         echo "<script>alert('Database insertion failed');</script>";
         exit;
     }
 } else {
-    header('Location:failure.php');
-    exit;
+    // Initialize PHPMailer
+    $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'brackets.developer17@gmail.com';
+        $mail->Password = 'nzrlvzmsdobatsfn';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');
+        $mail->addAddress($email, $name);
+        $mail->addAddress('escaperoombangalore@gmail.com', 'escapemgm');
+        $mail->addAddress('escapemgm@escapemgm.com');
+        $mail->addReplyTo('escaperoombangalore@gmail.com', 'escapemgm');
+        $mail->addCC('cc@example.com');
+        $mail->addBCC('bcc@example.com');
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'Booking Failed for Ransom';
+        $mail->Body = "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <link rel='shortcut icon' href='https://escapemgm.com/Gallary/escapelogo.webp' type='image/x-icon'>
+            <title>Booking Failed</title>
+            <style>
+                .table {
+                    display: block;
+                    margin: auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                thead {
+                    width: 100%;
+                }
+                th {
+                    border: 2px solid black;
+                    width: 200px;
+                }
+                .header {
+                    background-color: gold;
+                }
+            </style>
+        </head>
+        <body>
+            <center>
+                <a href='https://escapemgm.com'><img src='https://escapemgm.com/Gallary/escapelogo.webp' width='200px' height='auto' alt='Escape Room Logo'></a>
+                <h1>Booking Failed</h1>
+                <h2>Contact us if the Transaction Was Completed.</h2>
+            </center>
+            <p>
+                For any further queries or information regarding our offerings, you can reach out to us at <a href='tel:7676372273'>+91 7676372273</a>.<br>
+                Our Address: Escape room, 3rd Floor Pragati Mansion, 1st Cross Rd, 5th Block, Koramangala, Karnataka 560034.
+                Or <a href='https://maps.app.goo.gl/mcGNwANdqHG7pQ969'>click here</a>             
+            </p>
+            <h3><b>We at Escape room are looking forward to hosting you. Meanwhile you can get to know our team better.</b></h3>
+            <center>
+                <img src='https://escapemgm.com/Gallary/teamimg.jpeg' width='80%' height='auto' alt='Escape Team'>
+            </center>
+        </body>
+        </html>
+        ";
+        $mail->AltBody = 'Booking Unsuccessful for Ransom. Check your email for details.';
+
+        // Send email
+        $mail->send();
+    } catch (Exception $e) {
+        echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}')</script>";
+    }
+
+    // Include database connection
+    include "./utils/db.php";
+
+    // Update payment status to 'failed' in the cart table
+    $stmt = $conn->prepare("UPDATE cart SET payment_status='failed' WHERE cookie_id=?");
+    $stmt->bind_param("s", $local_cookie_id);
+
+    if ($stmt->execute()) {
+        $stmt->close();
+        $conn->close();
+        header('Location: failure.php');
+        exit;
+    } else {
+        echo "<script>alert('Failed to update payment status');</script>";
+        exit;
+    }
 }
 ?>
