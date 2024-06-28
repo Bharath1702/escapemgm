@@ -113,6 +113,9 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
                 <a href="./block_bookings/index.php">
                 <div class="col"><h3>manage timeslots</h3></div>
                 </a>
+                <a href="cart.php">
+                <div class="col"><h3>view cart</h3></div>
+                </a>
             </div>
           </div>
     
