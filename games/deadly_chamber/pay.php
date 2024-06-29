@@ -15,6 +15,7 @@ if (API_STATUS == 'LIVE') {
     $url = UATURLPAY;
 }
 
+// Initialize cURL to check URL availability
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -26,24 +27,6 @@ if (isset($_POST['name'], $_POST['email'], $_POST['date'], $_POST['timeslot'], $
     session_start();
     session_regenerate_id();
 
-    // Function to generate a random value
-    function generateRandomValue()
-    {
-        return bin2hex(random_bytes(16)); // Generate a 32-character hexadecimal random string
-    }
-
-    // Check if the random value cookie is set
-    if (!isset($_COOKIE['randomValue'])) {
-        // Generate a random value
-        $randomValue = generateRandomValue();
-
-        // Set the cookie with the random value for 1 day
-        setcookie('randomValue', $randomValue, time() + 6000, "/"); // 86400 seconds = 1 day
-    } else {
-        // Retrieve the random value from the cookie
-        $randomValue = $_COOKIE['randomValue'];
-    }
-
     // Assign POST data to session variables
     $_SESSION['name'] = $_POST['name'];
     $_SESSION['email'] = $_POST['email'];
@@ -52,43 +35,24 @@ if (isset($_POST['name'], $_POST['email'], $_POST['date'], $_POST['timeslot'], $
     $_SESSION['mobile'] = $_POST['mobile'];
     $_SESSION['qty'] = $_POST['qty'];
     $_SESSION['amount'] = $_POST['amount'];
-    $game = "DEADLY CHAMBER";
-    $status = "PENDING";
+    $game = 'DEADLY CHAMBER';
+
+    include './utils/db.php';
+
     // Insert data into the cart table
-    if (isset($_COOKIE['randomValue'])) {
-        // Database connection
-        require './utils/db.php';
-
-    // Check if a record with the same cookie_id already exists
-    $checkStmt = $conn->prepare("SELECT COUNT(*) as count FROM cart WHERE cookie_id = ?");
-    $checkStmt->bind_param("s", $randomValue);
-    $checkStmt->execute();
-    $result = $checkStmt->get_result();
-    $row = $result->fetch_assoc();
-    $count = $row['count'];
-    $checkStmt->close();
-
-    if ($count > 0) {
-        // If a record exists, delete it
-        $deleteStmt = $conn->prepare("DELETE FROM cart WHERE cookie_id = ?");
-        $deleteStmt->bind_param("s", $randomValue);
-        $deleteStmt->execute();
-        $deleteStmt->close();
+    $stmt = $conn->prepare("INSERT INTO cart (name, email, mobile, game, date, no_of_players, timeslot_id, amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    if ($stmt) {
+        $stmt->bind_param("sssssiis", $_SESSION['name'], $_SESSION['email'], $_SESSION['mobile'], $game, $_SESSION['date'], $_SESSION['qty'], $_SESSION['timeslot'], $_SESSION['amount']);
+        $stmt->execute();
+        $stmt->close();
+    } else {
+        echo "Error: " . $conn->error;
     }
-
-    // Prepare the SQL statement to insert data into the cart table
-    $insertStmt = $conn->prepare("INSERT INTO cart (cookie_id, name, email, mobile,game, date, no_of_players, timeslot_id,amount, payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ? , ? , ?)");
-    $insertStmt->bind_param("ssssssisis", $randomValue, $_SESSION['name'], $_SESSION['email'], $_SESSION['mobile'],$game, $_SESSION['date'], $_SESSION['qty'], $_SESSION['timeslot'], $_SESSION['amount'],$status);
-
-    // Execute the statement and check for success
-    $insertStmt->execute();
-    // Close the statement and the database connection
-    $insertStmt->close();
     $conn->close();
-} }else {
+} else {
     echo "<script>alert('Please try clearing the browser cache and try again')</script>";
+    exit;
 }
-
 
 // Create payload for payment request
 $payLoad = array(
@@ -142,12 +106,15 @@ curl_close($curl);
 
 // Handle cURL errors
 if ($err) {
-    echo "cURL Error #:" . $err;
+    echo "Check Your Internet Connection or Try Again after sometimes ";
 } else {
     $res = json_decode($response);
     if (isset($res->success) && $res->success == '1') {
         $payUrl = $res->data->instrumentResponse->redirectInfo->url;
         header('Location:' . $payUrl); // Redirect to payment URL
+        exit;
+    } else {
+        echo "Payment initiation failed. Please try again.";
     }
 }
 ?>
