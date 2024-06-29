@@ -16,7 +16,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
     exit;
 }
 // Fetch data from the cart table
-$sql = "SELECT id, cookie_id, name, email, mobile, game, date, no_of_players, timeslot_id, amount, payment_status FROM cart";
+$sql = "SELECT id,  name, email, mobile, game, date, no_of_players, timeslot_id, amount FROM cart";
 $result = $conn->query($sql);
 
 // Check if there are records
@@ -25,7 +25,6 @@ if ($result->num_rows > 0) {
     echo '<table border="1">';
     echo '<tr>';
     echo '<th>ID</th>';
-    echo '<th>Cookie ID</th>';
     echo '<th>Name</th>';
     echo '<th>Email</th>';
     echo '<th>Mobile</th>';
@@ -34,14 +33,12 @@ if ($result->num_rows > 0) {
     echo '<th>No. of Players</th>';
     echo '<th>Timeslot ID</th>';
     echo '<th>Amount</th>';
-    echo '<th>Payment Status</th>';
     echo '</tr>';
     
     // Output data of each row
     while($row = $result->fetch_assoc()) {
         echo '<tr>';
         echo '<td>' . $row['id'] . '</td>';
-        echo '<td>' . $row['cookie_id'] . '</td>';
         echo '<td>' . $row['name'] . '</td>';
         echo '<td>' . $row['email'] . '</td>';
         echo '<td>' . $row['mobile'] . '</td>';
@@ -50,7 +47,6 @@ if ($result->num_rows > 0) {
         echo '<td>' . $row['no_of_players'] . '</td>';
         echo '<td>' . $row['timeslot_id'] . '</td>';
         echo '<td>' . $row['amount'] . '</td>';
-        echo '<td>' . $row['payment_status'] . '</td>';
         echo '</tr>';
     }
     
