@@ -41,7 +41,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['date'], $_POST['timeslot'], $
         setcookie('randomValue', $randomValue, time() + 6000, "/"); // 86400 seconds = 1 day
     } else {
         // Retrieve the random value from the cookie
-        $randomValue = generateRandomValue();
+        $randomValue = $_COOKIE['randomValue'];
     }
 
     // Assign POST data to session variables

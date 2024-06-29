@@ -11,13 +11,6 @@ use PHPMailer\PHPMailer\Exception;
 
 session_start();
 
-$local_cookie_id = $_COOKIE['randomValue'] ?? null;
-
-if (!$local_cookie_id) {
-    echo "Cookie ID not found. Please enable cookies in your browser.";
-    exit;
-}
-
 // Function to retrieve POST data with a fallback to session data
 function get_post_or_session($key) {
     return $_POST[$key] ?? $_SESSION[$key] ?? null;
@@ -113,20 +106,8 @@ if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS"
 
     if ($stmt->execute()) {
         $stmt->close();
-
-        // Update payment status in the cart table
-        $stmt = $conn->prepare("UPDATE cart SET payment_status='success' WHERE cookie_id=?");
-        $stmt->bind_param("s", $local_cookie_id);
-
-        if ($stmt->execute()) {
-            $stmt->close();
-            $conn->close();
             header('Location: success.php');
             exit;
-        } else {
-            echo "<script>alert('Failed to update payment status');</script>";
-            exit;
-        }
     } else {
         echo "<script>alert('Database insertion failed');</script>";
         exit;
@@ -209,22 +190,7 @@ if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS"
     } catch (Exception $e) {
         echo "<script>alert('Email could not be sent. Mailer Error: {$mail->ErrorInfo}')</script>";
     }
-
-    // Include database connection
-    include "./utils/db.php";
-
-    // Update payment status to 'failed' in the cart table
-    $stmt = $conn->prepare("UPDATE cart SET payment_status='failed' WHERE cookie_id=?");
-    $stmt->bind_param("s", $local_cookie_id);
-
-    if ($stmt->execute()) {
-        $stmt->close();
-        $conn->close();
         header('Location: failure.php');
         exit;
-    } else {
-        echo "<script>alert('Failed to update payment status');</script>";
-        exit;
-    }
 }
 ?>
