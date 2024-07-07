@@ -1,4 +1,5 @@
 <?php
+include '../../mailconfig.php'
  require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
  require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
  require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
@@ -50,10 +51,10 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['da
  try {
      // Server settings
      $mail->isSMTP();
-     $mail->Host = 'smtp.gmail.com';
+     $mail->Host = HOST;
      $mail->SMTPAuth = true;
-     $mail->Username = 'brackets.developer17@gmail.com';
-     $mail->Password = 'nzrlvzmsdobatsfn';
+     $mail->Username = USERNAME;
+     $mail->Password = PASSWORD;
      $mail->SMTPSecure = 'tls';
      $mail->Port = 587;
 

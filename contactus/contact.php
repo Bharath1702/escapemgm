@@ -1,7 +1,7 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
- 
+ require'../mailconfig.php';
 require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
 require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
 require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
@@ -25,13 +25,13 @@ if(isset($_POST['submit'])){
     
     try {
         //Server settings
-        $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host       = 'smtp.gmail.com';          // Specify main and backup SMTP servers
-        $mail->SMTPAuth   = true;                             // Enable SMTP authentication
-        $mail->Username   = 'brackets.developer17@gmail.com';           // SMTP username
-        $mail->Password   = 'nzrlvzmsdobatsfn';                // SMTP password
-        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
-        $mail->Port       = 587;                              // TCP port to connect to
+        $mail->isSMTP();
+        $mail->Host = HOST;
+        $mail->SMTPAuth = true;
+        $mail->Username = USERNAME;
+        $mail->Password = PASSWORD;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
  
         //Recipients
     $mail->setFrom('escapemgm@escapemgm.com', 'escapemgm');

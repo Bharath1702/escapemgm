@@ -1,7 +1,9 @@
 <?php
-require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
-require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
-require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
+include '../../mailconfig.php'
+ require '/home/escapemgm/public_html/phpmailer/src/Exception.php';
+ require '/home/escapemgm/public_html/phpmailer/src/PHPMailer.php';
+ require '/home/escapemgm/public_html/phpmailer/src/SMTP.php';
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -51,13 +53,13 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['da
     $mail = new PHPMailer(true);
     try {
         // Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'brackets.developer17@gmail.com';
-        $mail->Password = 'nzrlvzmsdobatsfn';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+          $mail->isSMTP();
+     $mail->Host = HOST;
+     $mail->SMTPAuth = true;
+     $mail->Username = USERNAME;
+     $mail->Password = PASSWORD;
+     $mail->SMTPSecure = 'tls';
+     $mail->Port = 587;
 
         // Recipients
         $mail->setFrom('escaperoombangalore@gmail.com', 'escapemgm-noreply');

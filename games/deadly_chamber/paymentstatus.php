@@ -105,7 +105,7 @@ if ($responsePayment['success'] && $responsePayment['code'] == "PAYMENT_SUCCESS"
         exit;
     }
 } else {
-    header('Location:failure.php');
+    header('Location:failuer.php');
     exit;
 }
 ?>
